@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : SIngleTon<RoomManager>
 {
     [SerializeField] GameObject roomPrefab;
     [SerializeField] private int maxRooms = 15;
