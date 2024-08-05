@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4637544880986022530
 Transform:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &212877950593390355
 Transform:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5853120371126488411
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7408485999384907053
 Transform:
   m_ObjectHideFlags: 0
@@ -633,6 +633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1732907557266504416}
   - component: {fileID: 8280342947865829769}
+  - component: {fileID: 5654302034507628141}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -673,6 +674,26 @@ MonoBehaviour:
   leftDoor: {fileID: 1928807921648801648}
   rightDoor: {fileID: 670334371451729896}
   bottomDoor: {fileID: 1614374201721781388}
+--- !u!114 &5654302034507628141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7365687132011431427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971fc8d309cd56b4ca38680128694461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topDoor: {fileID: 2804276770284155632}
+  leftDoor: {fileID: 1928807921648801648}
+  rightDoor: {fileID: 670334371451729896}
+  bottomDoor: {fileID: 1614374201721781388}
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
 --- !u!1 &7409400050084183488
 GameObject:
   m_ObjectHideFlags: 0
