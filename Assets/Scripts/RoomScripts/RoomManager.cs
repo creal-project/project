@@ -7,6 +7,7 @@ public class RoomManager : SIngleTon<RoomManager>
     [SerializeField] GameObject roomPrefab;
     [SerializeField] private int maxRooms = 15;
     [SerializeField] private int minRooms = 10;
+    [SerializeField] private GameObject Stair;
     
 
     // Augmenter la taille des cases
@@ -24,10 +25,14 @@ public class RoomManager : SIngleTon<RoomManager>
 
     private int roomCount;
 
+    private int Rand ;
+
     private bool generationComplete = false;
 
     private void Start()
     {
+        Rand = Rand = Random.Range(5, 8);
+        Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();
 
@@ -94,10 +99,15 @@ public class RoomManager : SIngleTon<RoomManager>
         roomCount++;
 
         var newRoom = Instantiate(roomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
+        
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"Room-{roomCount}";
-        roomObjects.Add(newRoom);
 
+        roomObjects.Add(newRoom);
+        if (roomCount == Rand)
+        {
+            GameObject myInstance = Instantiate(Stair, newRoom.transform.position, Quaternion.identity);
+        }
         OpenDoors(newRoom, x, y);
 
         return true;
