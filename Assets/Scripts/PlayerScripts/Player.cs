@@ -23,13 +23,13 @@ public class Player : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        Move();
+        PlayerMove();
     }
 
 
-    void Move()
+    void PlayerMove()
     {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
@@ -54,23 +54,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    void interactions()
+    /*void interactions()
     {
         if ()
         {
         
         }
-    }
+    }*/
 
 
 
-    /*void MA()//¿ø°Å¸® °ø°Ý
+    /*void MA()//ï¿½ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         void attack()
         {
-            if (Input.GetKey(KeyCode.X))//°ø°ÝÅ° ÀÓ½Ã ÁöÁ¤
+            if (Input.GetKey(KeyCode.X))//ï¿½ï¿½ï¿½ï¿½Å° ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½
             {
-                isattack = true;//°ø°Ý ¸ð¼Ç
+                isattack = true;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 if (isattack == true)
                 {
                     animator.SetBool("attack", true);

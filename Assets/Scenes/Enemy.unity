@@ -391,8 +391,8 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0}
   FinalNodeList: []
   movePath: []
-  allowDiagonal: 0
-  dontCrossCorner: 0
+  allowDiagonal: 1
+  dontCrossCorner: 1
   dest: {x: 0, y: 0}
   isMoving: 0
   isPathFinding: 0

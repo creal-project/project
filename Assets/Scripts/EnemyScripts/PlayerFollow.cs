@@ -36,24 +36,23 @@ public class PlayerFollow : MonoBehaviour
     public float speed;
     private void Update()
     {
-        dest = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        dest = Camera.main.ScreenToWorldPoint(Input.mousePosition);//추후 플레이어 좌표
         startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
         targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
-        if (!isMoving
-            && Mathf.Round(this.transform.position.x) == Mathf.RoundToInt(dest.x)
-            && Mathf.Round(this.transform.position.y) == Mathf.RoundToInt(dest.y)
-        )
-        if (Input.GetMouseButtonDown(1));
+        if (Input.GetMouseButtonDown(1))
         {
-            StopAllCoroutines();
-            isPathFinding = false;
-            i = 0;
-            FinalNodeList = null;
-            PathFinding();
-            StartCoroutine(PlayerMove(FinalNodeList));
+            Follow();
         }
     }
-
+    private void Follow()
+    {
+        StopAllCoroutines();
+        isPathFinding = false;
+        i = 0;
+        FinalNodeList = null;
+        PathFinding();
+        StartCoroutine(PlayerMove(FinalNodeList));
+    }
     List<Vector2> GetRouteList(List<Node> oldList)
     {
         List<Vector2> newList = new List<Vector2>();
@@ -75,26 +74,7 @@ public class PlayerFollow : MonoBehaviour
         Vector2 enemyPosition = transform.position;
         while (currentRoute < routeList.Count)
         {
-            print(currentRoute);
             Vector2 moveVector = enemyPosition - routeList[currentRoute];
-
-            float rotation = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
-
-            if (rotation > 360) rotation -= 360;
-            else if (rotation < 0) rotation += 360;
-
-            switch (rotation / 45)
-            {
-                case 0: print("a"); break;
-                case 1: print("b"); break;
-                case 2: print("c"); break;
-                case 3: print("d"); break;
-                case 4: print("e"); break;
-                case 5: print("f"); break;
-                case 6: print("g"); break;
-                case 7: print("h"); break;
-            }
-
             if (((Vector2)transform.position - routeList[currentRoute]).magnitude <= 0.1f)
             {
                 currentRoute++;
