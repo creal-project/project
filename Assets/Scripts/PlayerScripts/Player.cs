@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     int m_s;
     float a_c;
 
+    int index;
+
     bool attacking;
 
     void Start()
@@ -46,11 +48,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision .collider.gameObject.CompareTag("enemy"))
+        if (collision.collider.gameObject.CompareTag("enemy"))
         {
-            hp -= 20;
+            collision.gameObject.SetActive(false);
         }
     }
 

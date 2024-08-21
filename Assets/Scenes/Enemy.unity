@@ -397,7 +397,7 @@ MonoBehaviour:
   isMoving: 0
   isPathFinding: 0
   i: 0
-  speed: 5
+  speed: 2
 --- !u!1 &1025276909
 GameObject:
   m_ObjectHideFlags: 0

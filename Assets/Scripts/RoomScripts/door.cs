@@ -41,22 +41,25 @@ public class Door : MonoBehaviour
 
     void Move()
     {
-        if (top && Input.GetKeyDown(KeyCode.E))
+        if (GameManager.Instance.isAllowToMove)
         {
-            
-            player.transform.Translate(Vector2.up * 7f);
-        }
-        if (bottom && Input.GetKeyDown(KeyCode.E))
-        {
-            player.transform.Translate(Vector2.down *7f);
-        }
-        if (left && Input.GetKeyDown(KeyCode.E))
-        {
-            player.transform.Translate(Vector2.left * 7f);
-        }
-        if (right && Input.GetKeyDown(KeyCode.E))
-        {
-            player.transform.Translate(Vector2.right * 7f);
+            if (top && Input.GetKeyDown(KeyCode.E))
+            {
+
+                player.transform.Translate(Vector2.up * 7f);
+            }
+            if (bottom && Input.GetKeyDown(KeyCode.E))
+            {
+                player.transform.Translate(Vector2.down * 7f);
+            }
+            if (left && Input.GetKeyDown(KeyCode.E))
+            {
+                player.transform.Translate(Vector2.left * 7f);
+            }
+            if (right && Input.GetKeyDown(KeyCode.E))
+            {
+                player.transform.Translate(Vector2.right * 7f);
+            }
         }
     }
 }
