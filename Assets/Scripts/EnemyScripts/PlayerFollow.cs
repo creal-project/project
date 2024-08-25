@@ -49,8 +49,10 @@ public class PlayerFollow : MonoBehaviour
             isroomFound = true;
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
-            this.gameObject.SetActive(true);
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
             dest = GameObject.Find("Player").transform.position;
+            startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
+            targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
             playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
             if(playerDistence <= GameManager.Instance.enemyDetectDistence){
                 Follow();
@@ -64,10 +66,8 @@ public class PlayerFollow : MonoBehaviour
         }
         else{
             //비활성화로 해놨는데 오브젝트회색으로 바꾸고 움직이지않는걸로 바꿀지 생각중
-            this.gameObject.SetActive(false);
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,255);
         }
-        startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
-        targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
     }
     private void Follow()
     {
