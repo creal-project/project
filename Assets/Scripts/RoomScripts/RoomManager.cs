@@ -28,7 +28,7 @@ public class RoomManager : SIngleTon<RoomManager>
 
     private int Rand ;
 
-    private bool generationComplete = false;
+    public bool generationComplete = false;
 
     private void Start()
     {

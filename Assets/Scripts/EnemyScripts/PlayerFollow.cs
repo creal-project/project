@@ -34,16 +34,40 @@ public class PlayerFollow : MonoBehaviour
 
     public int i = 0;
     public float speed;
-    void Start(){
-        topRight = new Vector2Int((int)(GameManager.Instance.activatedRoomLocation.x+8),(int)(GameManager.Instance.activatedRoomLocation.y+4));
-        bottomLeft = new Vector2Int((int)(GameManager.Instance.activatedRoomLocation.x-8),(int)(GameManager.Instance.activatedRoomLocation.y-4));
-    }
+
+    public int currentEnemyRoom = -1;
+    bool isroomFound = false;
+
+    float playerDistence;
+
     private void FixedUpdate()
     {
-        dest = GameObject.Find("Player").transform.position;
-        startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
-        targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
-        Follow();
+        if(!isroomFound&&RoomManager.Instance.generationComplete){
+            FindEnemyRoom();
+            topRight = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x+8),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y+4));
+            bottomLeft = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x-8),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y-4));
+            isroomFound = true;
+        }
+        if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
+            dest = GameObject.Find("Player").transform.position;
+            startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
+            targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
+            playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
+            if(playerDistence <= GameManager.Instance.enemyDetectDistence){
+                Follow();
+            }
+            else{
+                //dest를 룸 내 랜덤좌표로 설정
+            }
+            if(playerDistence <= GameManager.Instance.enemyAttackDistence){
+                //공격코드
+            }
+        }
+        else{
+            //비활성화로 해놨는데 오브젝트회색으로 바꾸고 움직이지않는걸로 바꿀지 생각중
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,255);
+        }
     }
     private void Follow()
     {
@@ -64,6 +88,16 @@ public class PlayerFollow : MonoBehaviour
         }
         newList.RemoveAt(0);
         return newList;
+    }
+    void FindEnemyRoom(){
+        for(int i=0;i<RoomManager.Instance.roomCount;i++){
+            if(this.transform.position.x>=((GameManager.Instance.roomLocation[i].x)-7.5)&&this.transform.position.x<=((GameManager.Instance.roomLocation[i].x)+7.5)){
+                if(this.transform.position.y>=((GameManager.Instance.roomLocation[i].y)-3.5)&&this.transform.position.y<=((GameManager.Instance.roomLocation[i].y)+3.5)){
+                    currentEnemyRoom = i;
+                    return;
+                }
+            }
+        }
     }
 
     IEnumerator PlayerMove(List<Node> optimizedPath)
