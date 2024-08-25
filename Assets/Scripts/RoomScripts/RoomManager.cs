@@ -13,9 +13,10 @@ public class RoomManager : SIngleTon<RoomManager>
     // Augmenter la taille des cases
     int roomWidth = 20;  // Anciennement 20
     int roomHeight = 12;  // Anciennement 12
-
+    GameObject player;
     int gridSizeX = 10;
     int gridSizeY = 10;
+    public GameObject CurrentRoom;
 
     private List<GameObject> roomObjects = new List<GameObject>();
 
@@ -31,6 +32,7 @@ public class RoomManager : SIngleTon<RoomManager>
 
     private void Start()
     {
+        player = GameObject.Find("Player");
         Rand = Rand = Random.Range(5, 8);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
@@ -42,6 +44,7 @@ public class RoomManager : SIngleTon<RoomManager>
 
     private void Update()
     {
+        
         if (roomQueue.Count > 0 && roomCount < maxRooms && !generationComplete)
         {
             Vector2Int roomIndex = roomQueue.Dequeue();
@@ -67,6 +70,7 @@ public class RoomManager : SIngleTon<RoomManager>
             }
             generationComplete = true;
         }
+        CurRoom();
     }
 
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
@@ -116,6 +120,35 @@ public class RoomManager : SIngleTon<RoomManager>
 
         return true;
     }
+    public void CurRoom()
+    {
+        if (CurrentRoom == null)
+        {
+            float minDistance = float.MaxValue;
+            foreach (var room in roomObjects)
+            {
+                float distance = Vector2.Distance(player.transform.position, room.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    CurrentRoom = room;
+                }
+            }
+        }
+
+        
+        foreach (var room in roomObjects)
+        {
+            float distanceToCurrentRoom = Vector2.Distance(CurrentRoom.transform.position, player.transform.position);
+            float distanceToNewRoom = Vector2.Distance(room.transform.position, player.transform.position);
+
+            if (distanceToNewRoom < distanceToCurrentRoom)
+            {
+                CurrentRoom = room;
+            }
+        }
+    }
+
 
     private void RegenerateRooms()
     {

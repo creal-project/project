@@ -11,13 +11,15 @@ public class Player : MonoBehaviour
     int def;
     int m_s;
     float a_c;
-
     int index;
+    public int moveSpeed = 10;
+    Rigidbody2D rb;
 
     bool attacking;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         hp = 100;
         atk = 10;
         def = 50;
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour
     }
 
 
-    void FixedUpdate()
+    private void Update()
     {
         PlayerMove();
     }
@@ -36,8 +38,15 @@ public class Player : MonoBehaviour
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
 
-        Vector3 movevector = new Vector3(hor, ver).normalized;
-        transform.position += movevector * Time.deltaTime * 10;
+        
+        Vector2 moveVector = new Vector2(hor, ver).normalized;
+
+        
+        transform.position += (Vector3)moveVector * moveSpeed * Time.deltaTime;
+        //float moveX = Input.GetAxis("Horizontal");
+        //float moveY = Input.GetAxis("Vertical");
+
+        //rb.velocity = new Vector3(moveX, moveY, 0) * moveSpeed;
     }
 
     void attack()

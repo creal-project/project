@@ -10,11 +10,13 @@ public class Door : MonoBehaviour
     GameObject player;
 
     public bool top, left, right, bottom;
-
-    float detectionRange = 2.5f;
-
+    
+    float detectionRange = 1.5f;
+    GameObject Camera;
     private void Start()
     {
+       
+        Camera = GameObject.Find("Main Camera");
         player = GameObject.Find("Player");
     }
 
@@ -43,23 +45,24 @@ public class Door : MonoBehaviour
     {
         if (GameManager.Instance.isAllowToMove)
         {
+
             if (top && Input.GetKeyDown(KeyCode.E))
             {
-
-                player.transform.Translate(Vector2.up * 7f);
+                player.transform.Translate(Vector2.up + new Vector2(0, 4.5f));
             }
             if (bottom && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.down * 7f);
+                player.transform.Translate(Vector2.down + new Vector2(0, -4.5f));
             }
             if (left && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.left * 7f);
+                player.transform.Translate(Vector2.left + new Vector2(-4.5f, 0));
             }
             if (right && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.right * 7f);
+                player.transform.Translate(Vector2.right + new Vector2(4.5f, 0));
             }
+
         }
     }
 }

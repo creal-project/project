@@ -374,6 +374,7 @@ MonoBehaviour:
   maxRooms: 8
   minRooms: 5
   Stair: {fileID: 4375376290386152504, guid: 418ad04d37fc2e1409e2e63b2327c382, type: 3}
+  CurrentRoom: {fileID: 0}
   roomCount: 0
 --- !u!4 &1126359639
 Transform:
@@ -663,6 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 0}
+  moveSpeed: 10
 --- !u!58 &1923421962
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -712,7 +714,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -736,6 +738,7 @@ GameObject:
   - component: {fileID: 2086681787}
   - component: {fileID: 2086681786}
   - component: {fileID: 2086681785}
+  - component: {fileID: 2086681788}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -817,6 +820,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2086681788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086681784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a90d841d724b54198551b9da94e2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LerpSmooth: 0.009
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
