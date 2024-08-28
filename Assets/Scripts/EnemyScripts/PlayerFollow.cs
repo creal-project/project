@@ -51,8 +51,8 @@ public class PlayerFollow : MonoBehaviour
     {
         if(!isroomFound&&RoomManager.Instance.generationComplete){
             FindEnemyRoom();
-            topRight = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x+8),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y+4));
-            bottomLeft = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x-8),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y-4));
+            topRight = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x+16),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y+8));
+            bottomLeft = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x-16),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y-8));
             isroomFound = true;
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
@@ -131,11 +131,12 @@ public class PlayerFollow : MonoBehaviour
             yield return null;
         }
     }
-    // IEnumerator RandPosition(){
-    //     if(isArrived){
-
-    //     }
-    // }
+    //IEnumerator RandPosition(){
+    //    if(isArrived){
+    //        Random.Range()
+    //    }
+    //    yield return null;
+    //}
 
     public void PathFinding()
     {
@@ -195,8 +196,6 @@ public class PlayerFollow : MonoBehaviour
                 //for (int i = 0; i < FinalNodeList.Count; i++) print(i + "��°�� " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
             }
 
-
-            // �֢آע�
             if (allowDiagonal)
             {
                 OpenListAdd(CurNode.x + 1, CurNode.y + 1);
