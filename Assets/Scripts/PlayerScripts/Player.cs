@@ -6,9 +6,9 @@ public class Player : MonoBehaviour
 {
     public GameObject weapon;
 
-    int atk;
     int hp;
-    int def;
+    int hp_max;
+    int atk;
     int m_s;
     float a_c;
     int index;
@@ -19,11 +19,17 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+<<<<<<< Updated upstream
         rb = GetComponent<Rigidbody2D>();
+=======
+
+        attacking = false;
+        hp_max = 100;
+>>>>>>> Stashed changes
         hp = 100;
         atk = 10;
-        def = 50;
-        attacking = false;
+        m_s = 1;
+        a_c = 1;
     }
 
 
@@ -57,13 +63,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.CompareTag("enemy"))
         {
             collision.gameObject.SetActive(false);
         }
     }
+
+
 
     /*void interactions()
     {
