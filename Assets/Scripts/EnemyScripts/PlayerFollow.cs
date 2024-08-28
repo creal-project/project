@@ -34,11 +34,16 @@ public class PlayerFollow : MonoBehaviour
 
     public int i = 0;
     public float speed;
+    public bool isArrived = false;
 
     public int currentEnemyRoom = -1;
     bool isroomFound = false;
 
     float playerDistence;
+    private Color enemyColor;
+    private void Start(){
+        //enemyColor = this.gameObject.GetComponent<SpriteRenderer>().color;
+    }
 
     private void FixedUpdate()
     {
@@ -50,6 +55,7 @@ public class PlayerFollow : MonoBehaviour
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
+            enemyColor.a = 1f;
             dest = GameObject.Find("Player").transform.position;
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
@@ -65,8 +71,8 @@ public class PlayerFollow : MonoBehaviour
             }
         }
         else{
-            //비활성화로 해놨는데 오브젝트회색으로 바꾸고 움직이지않는걸로 바꿀지 생각중
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(0,0,255);
+            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(56,56,56);
+            //enemyColor.a = 150f;
         }
     }
     private void Follow()
@@ -91,8 +97,8 @@ public class PlayerFollow : MonoBehaviour
     }
     void FindEnemyRoom(){
         for(int i=0;i<RoomManager.Instance.roomCount;i++){
-            if(this.transform.position.x>=((GameManager.Instance.roomLocation[i].x)-7.5)&&this.transform.position.x<=((GameManager.Instance.roomLocation[i].x)+7.5)){
-                if(this.transform.position.y>=((GameManager.Instance.roomLocation[i].y)-3.5)&&this.transform.position.y<=((GameManager.Instance.roomLocation[i].y)+3.5)){
+            if(this.transform.position.x>=((GameManager.Instance.roomLocation[i].x)-15)&&this.transform.position.x<=((GameManager.Instance.roomLocation[i].x)+15)){
+                if(this.transform.position.y>=((GameManager.Instance.roomLocation[i].y)-7)&&this.transform.position.y<=((GameManager.Instance.roomLocation[i].y)+7)){
                     currentEnemyRoom = i;
                     return;
                 }
@@ -102,7 +108,6 @@ public class PlayerFollow : MonoBehaviour
 
     IEnumerator PlayerMove(List<Node> optimizedPath)
     {
-
         if (optimizedPath.Count <= 1) yield break;
         var routeList = GetRouteList(optimizedPath);
         int currentRoute = 0;
@@ -114,10 +119,19 @@ public class PlayerFollow : MonoBehaviour
             {
                 currentRoute++;
                 enemyPosition = transform.position;
+                isArrived = true;
             }
-            else transform.position -= (Vector3)(moveVector * speed * Time.deltaTime);
+            else{
+                transform.position -= (Vector3)(moveVector * speed * Time.deltaTime);
+                isArrived = false;
+            }
 
             yield return null;
+        }
+    }
+    IEnumerator RandPosition(){
+        if(isArrived){
+
         }
     }
 

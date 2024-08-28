@@ -70,7 +70,9 @@ public class RoomManager : SIngleTon<RoomManager>
             }
             generationComplete = true;
         }
-        CurRoom();
+        if(generationComplete){
+            CurRoom();
+        }
     }
 
     private void StartRoomGenerationFromRoom(Vector2Int roomIndex)

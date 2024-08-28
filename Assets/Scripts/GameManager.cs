@@ -14,26 +14,12 @@ public class GameManager : SIngleTon<GameManager>
     public float enemyDetectDistence;
     public float enemyAttackDistence;
     void FixedUpdate(){
-        enemyInRoom = Physics2D.OverlapBoxAll(activatedRoomLocation,new Vector2(15,7),0,whatIsLayer);
+        enemyInRoom = Physics2D.OverlapBoxAll(RoomManager.Instance.CurrentRoom.transform.position,new Vector2(15,7),0,whatIsLayer);
         if(enemyInRoom.Length==0){
             isAllowToMove = true;
         }
         else{
             isAllowToMove = false;
-        }
-        if(RoomManager.Instance.generationComplete){
-            FindPlayerRoom();
-        }
-    }
-    void FindPlayerRoom(){
-        for(int i=0;i<RoomManager.Instance.roomCount;i++){
-            if(player.transform.position.x>=((roomLocation[i].x)-7.5)&&player.transform.position.x<=((roomLocation[i].x)+7.5)){
-                if(player.transform.position.y>=((roomLocation[i].y)-3.5)&&player.transform.position.y<=((roomLocation[i].y)+3.5)){
-                    activatedRoomLocation=roomLocation[i];
-                    currentPlayerRoom = i;
-                    return;
-                }
-            }
         }
     }
 }

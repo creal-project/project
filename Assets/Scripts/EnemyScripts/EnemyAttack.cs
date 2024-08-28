@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Transform player;           // ÇÃ·¹ÀÌ¾îÀÇ Transform
-    public float attackRange = 2.0f;   // °ø°Ý ¹üÀ§ (°Å¸®¿¡ µû¶ó ¼³Á¤)
-    public int attackDamage = 2;       // ÀûÀÇ °ø°Ý·Â
-    private int playerHP = 10;         // ÇÃ·¹ÀÌ¾î HP
+    public Transform player;           // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Transform
+    public float attackRange = 2.0f;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    public int attackDamage = 2;       // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
+    private int playerHP = 10;         // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ HP
 
     void Update()
     {
-        // Àû°ú ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸® °è»ê
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        // ÇÃ·¹ÀÌ¾î°¡ °ø°Ý ¹üÀ§ ³»¿¡ ÀÖ´ÂÁö È®ÀÎ
         if (distanceToPlayer <= attackRange)
         {
             Attack();
@@ -23,18 +20,18 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack()
     {
-        // °ø°Ý ½ÇÇà
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         TakeDamage(attackDamage);
     }
 
     void TakeDamage(int damage)
     {
         playerHP -= damage;
-        Debug.Log("ÇÃ·¹ÀÌ¾îÀÇ ³²Àº Ã¼·Â: " + playerHP);
+        Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½: " + playerHP);
 
         if (playerHP <= 0)
         {
-           // ³ªÁß¿¡ ÇÔ¼ö ³Ö°í
+           // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ô¼ï¿½ ï¿½Ö°ï¿½
         }
     }
 }

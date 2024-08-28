@@ -19,13 +19,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-<<<<<<< Updated upstream
         rb = GetComponent<Rigidbody2D>();
-=======
 
         attacking = false;
         hp_max = 100;
->>>>>>> Stashed changes
         hp = 100;
         atk = 10;
         m_s = 1;
