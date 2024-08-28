@@ -8,10 +8,10 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject rightDoor;
     [SerializeField] GameObject bottomDoor;
     GameObject player;
-
+    public float a = 11f;
     public bool top, left, right, bottom;
     
-    float detectionRange = 1.5f;
+    float detectionRange = 3f;
     GameObject Camera;
     private void Start()
     {
@@ -48,19 +48,19 @@ public class Door : MonoBehaviour
 
             if (top && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.up + new Vector2(0, 4.5f));
+                player.transform.Translate(Vector2.up + new Vector2(0, a));
             }
             if (bottom && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.down + new Vector2(0, -4.5f));
+                player.transform.Translate(Vector2.down + new Vector2(0, -a));
             }
             if (left && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.left + new Vector2(-4.5f, 0));
+                player.transform.Translate(Vector2.left + new Vector2(-a, 0));
             }
             if (right && Input.GetKeyDown(KeyCode.E))
             {
-                player.transform.Translate(Vector2.right + new Vector2(4.5f, 0));
+                player.transform.Translate(Vector2.right + new Vector2(a, 0));
             }
 
         }

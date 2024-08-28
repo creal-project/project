@@ -650,8 +650,8 @@ Transform:
   m_GameObject: {fileID: 7365687132011431427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.46467, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1517788140456250076}
@@ -691,6 +691,7 @@ MonoBehaviour:
   leftDoor: {fileID: 1928807921648801648}
   rightDoor: {fileID: 670334371451729896}
   bottomDoor: {fileID: 1614374201721781388}
+  a: 11
   top: 0
   left: 0
   right: 0

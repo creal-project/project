@@ -11,8 +11,8 @@ public class RoomManager : SIngleTon<RoomManager>
     
 
     // Augmenter la taille des cases
-    int roomWidth = 20;  // Anciennement 20
-    int roomHeight = 12;  // Anciennement 12
+    int roomWidth = 40;  // Anciennement 20
+    int roomHeight = 24;  // Anciennement 12
     GameObject player;
     int gridSizeX = 10;
     int gridSizeY = 10;
