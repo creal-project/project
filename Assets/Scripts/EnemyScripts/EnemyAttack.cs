@@ -1,37 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Transform player;           // �÷��̾��� Transform
-    public float attackRange = 2.0f;   // ���� ���� (�Ÿ��� ���� ����)
-    public int attackDamage = 2;       // ���� ���ݷ�
-    private int playerHP = 10;         // �÷��̾� HP
+    public GameObject player;           
+    public float attackRange = 2.0f;   
+    public int attackDamage = 2;       
+    private int playerHP = 10;         
 
     void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= attackRange)
         {
-            Attack();
+           // Attack();
         }
     }
 
-    void Attack()
+    private void start()
     {
-        // ���� ����
-        TakeDamage(attackDamage);
+        player = GameObject.Find("Player");
     }
-
-    void TakeDamage(int damage)
-    {
-        playerHP -= damage;
-        Debug.Log("�÷��̾��� ���� ü��: " + playerHP);
-
-        if (playerHP <= 0)
-        {
-           // ���߿� �Լ� �ְ�
-        }
-    }
+    // void Attack()
+    // {
+    //     player.TakeDamage(attackDamage);
+        
+    // }
 }

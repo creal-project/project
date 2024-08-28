@@ -18,6 +18,7 @@ public class Node
 
 public class PlayerFollow : MonoBehaviour
 {
+    private GameObject player;
     public Vector2Int bottomLeft, topRight, startPos, targetPos;
     public List<Node> FinalNodeList;
     public List<Vector2> movePath = new List<Vector2>();
@@ -37,13 +38,14 @@ public class PlayerFollow : MonoBehaviour
     private int randPosY;
     public float speed;
     public bool isArrived = false;
-
+    public int attackDamage = 2;
     public int currentEnemyRoom = -1;
     bool isroomFound = false;
 
     float playerDistence;
     private Color enemyColor;
     private void Start(){
+        player = GameObject.Find("Player");
         //enemyColor = this.gameObject.GetComponent<SpriteRenderer>().color;
     }
 
@@ -58,7 +60,7 @@ public class PlayerFollow : MonoBehaviour
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
             enemyColor.a = 1f;
-            dest = GameObject.Find("Player").transform.position;
+            dest = player.transform.position;
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
             playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
@@ -69,7 +71,7 @@ public class PlayerFollow : MonoBehaviour
                 //dest를 룸 내 랜덤좌표로 설정
             }
             if(playerDistence <= GameManager.Instance.enemyAttackDistence){
-                //공격코드
+                player.GetComponent<Player>().TakeDamage(attackDamage);
             }
         }
         else{
