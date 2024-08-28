@@ -33,6 +33,8 @@ public class PlayerFollow : MonoBehaviour
     public bool isPathFinding = false;
 
     public int i = 0;
+    private int randPosX;
+    private int randPosY;
     public float speed;
     public bool isArrived = false;
 
@@ -129,12 +131,14 @@ public class PlayerFollow : MonoBehaviour
             yield return null;
         }
     }
-    //IEnumerator RandPosition(){
-    //    if(isArrived){
-    //        Random.Range()
-    //    }
-    //    yield return null;
-    //}
+    IEnumerator RandPosition(){
+        if(isArrived){
+            randPosX = Random.Range(-15,16);
+            randPosY = Random.Range(-7,8);
+            dest = new Vector2(randPosX,randPosY);
+        }
+        yield return null;
+    }
 
     public void PathFinding()
     {
