@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
     public GameObject weapon;
 
-    int hp;
-    int hp_max;
-    int atk;
-    int m_s;
-    float a_c;
-    int index;
+    public int hp;
+    public int hp_max;
+    public int atk;
+    public int m_s;
+    public float a_c;
+    public int index;
     public int moveSpeed = 10;
     Rigidbody2D rb;
 
@@ -66,6 +66,10 @@ public class Player : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
         }
+    }
+    public void TakeDamage(int attackDamage)
+    {
+        hp -= attackDamage;
     }
 
 
