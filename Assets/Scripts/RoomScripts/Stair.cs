@@ -28,10 +28,11 @@ public class Stair : MonoBehaviour
     }
     void InterAct()
     {
-        if (IsIn && Input.GetKeyDown(KeyCode.E))
+        if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy == true)
         {
-            //¾À·Îµå
-            Debug.Log("¾À·Îµå");
+            //ï¿½ï¿½ï¿½Îµï¿½
+            Debug.Log("¾À ÀÌµ¿");
+            //RoomManager.Instance.RegenerateRooms();
         }
     }
 }

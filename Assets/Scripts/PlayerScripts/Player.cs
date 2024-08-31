@@ -6,9 +6,9 @@ public class Player : MonoBehaviour
 {
     public GameObject weapon;
 
-    public int hp;
-    public int hp_max;
-    public int atk;
+    public int hp=100;
+    public int hp_max=100;
+    public float atk = 10f;
     public int m_s;
     public float a_c;
     public int index;
@@ -21,12 +21,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        attacking = false;
-        hp_max = 100;
-        hp = 100;
-        atk = 10;
-        m_s = 1;
-        a_c = 1;
+        
     }
 
 

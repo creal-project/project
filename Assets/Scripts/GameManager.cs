@@ -11,6 +11,7 @@ public class GameManager : SIngleTon<GameManager>
     public int currentPlayerRoom;
     public bool isAllowToMove = false;
     public LayerMask whatIsLayer;
+    public bool IsThereEnemy = false;
     public float enemyDetectDistence;
     public float enemyAttackDistence;
     void FixedUpdate(){
@@ -24,6 +25,7 @@ public class GameManager : SIngleTon<GameManager>
         if(RoomManager.Instance.generationComplete){
             FindPlayerRoom();
         }
+        FindAnyEnemy();
     }
     void FindPlayerRoom(){
         for(int i=0;i<RoomManager.Instance.roomCount;i++){
@@ -35,5 +37,17 @@ public class GameManager : SIngleTon<GameManager>
                 }
             }
         }
+    }
+    void FindAnyEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        if(enemies.Length == 0)
+        {
+            IsThereEnemy = true;
+        }
+        else{
+            IsThereEnemy = false;
+        }
+        
     }
 }

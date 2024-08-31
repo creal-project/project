@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ATK : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] float AttAdd = 10f;
+    GameObject Player;
     void Start()
     {
-        
+        Player = GameObject.Find("Player");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   void OnCollisionEnter2D(Collision2D collision)
+   {
+        if(collision.collider.CompareTag("Player"))
+        {                
+            Player.GetComponent<Player>().atk +=AttAdd;
+            Debug.Log("공격력 증가");
+            Destroy(gameObject);
+        }
+   }
 }
