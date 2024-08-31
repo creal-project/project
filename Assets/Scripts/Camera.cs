@@ -19,4 +19,8 @@ public class Camera : MonoBehaviour
     {
         moveCamera();
     }
+    private void Start()
+    {
+        
+    }
 }

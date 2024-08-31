@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &734263679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &790695156
 Rigidbody2D:
   serializedVersion: 4
@@ -618,6 +618,7 @@ MonoBehaviour:
   CurrentRoom: {fileID: 0}
   roomCount: 0
   generationComplete: 0
+  InitialRoomIndex: {x: 0, y: 0}
 --- !u!4 &1126359639
 Transform:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1222474195
 Rigidbody2D:
   serializedVersion: 4
@@ -949,7 +950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1351151420
 Rigidbody2D:
   serializedVersion: 4
@@ -1126,7 +1127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1834219814
 Rigidbody2D:
   serializedVersion: 4
@@ -1337,6 +1338,7 @@ MonoBehaviour:
   whatIsLayer:
     serializedVersion: 2
     m_Bits: 8
+  IsThereEnemy: 0
   enemyDetectDistence: 4
   enemyAttackDistence: 2
 --- !u!1 &1923421958
@@ -1527,7 +1529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1931768801
 Rigidbody2D:
   serializedVersion: 4

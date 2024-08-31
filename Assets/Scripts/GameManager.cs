@@ -38,6 +38,7 @@ public class GameManager : SIngleTon<GameManager>
             }
         }
     }
+  
     void FindAnyEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
