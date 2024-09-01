@@ -15,6 +15,7 @@ TagManager:
   - 9
   - 10
   - enemy
+  - Stair
   layers:
   - Default
   - TransparentFX

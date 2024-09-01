@@ -5,8 +5,8 @@ using UnityEngine;
 public class RoomManager : SIngleTon<RoomManager>
 {
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] private int maxRooms = 15;
-    [SerializeField] private int minRooms = 10;
+    [SerializeField] public int maxRooms = 15;
+    [SerializeField] public int minRooms = 10;
     [SerializeField] private GameObject Stair;
 
 
@@ -39,7 +39,7 @@ public class RoomManager : SIngleTon<RoomManager>
     {
        // 초기화 코드
         player = GameObject.Find("Player");
-        Rand = Random.Range(5, 8);
+        Rand = Random.Range(minRooms, maxRooms);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();
@@ -79,7 +79,6 @@ public class RoomManager : SIngleTon<RoomManager>
             Debug.Log($"Generation complete, {roomCount} rooms created");
             for (int i = 0; i < roomCount; i++)
             {
-                roomObjects[i].gameObject.tag = $"{i + 1}";
                 GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
             }
             generationComplete = true;
@@ -125,7 +124,7 @@ public class RoomManager : SIngleTon<RoomManager>
         newRoom.name = $"Room-{roomCount}";
 
         roomObjects.Add(newRoom);
-        if (roomCount == Rand)
+        if (roomCount == Rand && IsThereStair())
         {
             GameObject myInstance = Instantiate(Stair, newRoom.transform.position, Quaternion.identity);
         }
@@ -170,6 +169,7 @@ public class RoomManager : SIngleTon<RoomManager>
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue.Clear();
         roomCount = 0;
+        Rand = Random.Range(minRooms, maxRooms);
         generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
@@ -234,6 +234,18 @@ public class RoomManager : SIngleTon<RoomManager>
         int gridX = gridIndex.x;
         int gridY = gridIndex.y;
         return new Vector3(roomWidth * (gridX - gridSizeX / 2), roomHeight * (gridY - gridSizeY / 2));
+    }
+    private bool IsThereStair()
+    {
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("Stair");
+        if (arr.Length == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnDrawGizmos()
