@@ -8,7 +8,7 @@ public class RoomManager : SIngleTon<RoomManager>
     [SerializeField] public int maxRooms = 15;
     [SerializeField] public int minRooms = 10;
     [SerializeField] private GameObject Stair;
-
+    public int roomGenerateCount = 1;
 
     // Augmenter la taille des cases
     int roomWidth = 40;  // Anciennement 20
