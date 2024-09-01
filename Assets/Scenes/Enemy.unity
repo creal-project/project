@@ -299,6 +299,8 @@ GameObject:
   - component: {fileID: 956727202}
   - component: {fileID: 956727201}
   - component: {fileID: 956727203}
+  - component: {fileID: 956727205}
+  - component: {fileID: 956727204}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -398,6 +400,40 @@ MonoBehaviour:
   isPathFinding: 0
   i: 0
   speed: 2
+  isArrived: 0
+  attackDamage: 2
+  currentEnemyRoom: -1
+--- !u!114 &956727204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956727200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40826dc77895c614cb18c9c253b48ac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  projectileSpeed: 10
+  fireRate: 1
+  numberOfProjectiles: 8
+--- !u!114 &956727205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956727200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b5d52bf76ab9742a783ec5c0a5df9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  MonsterHp: 100
 --- !u!1 &1025276909
 GameObject:
   m_ObjectHideFlags: 0
