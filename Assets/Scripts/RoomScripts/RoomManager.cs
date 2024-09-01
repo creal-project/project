@@ -37,7 +37,6 @@ public class RoomManager : SIngleTon<RoomManager>
     }
     public void Start1()
     {
-       // 초기화 코드
         player = GameObject.Find("Player");
         Rand = Random.Range(minRooms, maxRooms);
         Debug.Log(Rand);

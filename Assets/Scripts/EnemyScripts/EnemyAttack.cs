@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
@@ -20,7 +16,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void start()
+    private void Start()
     {
         player = GameObject.Find("Player");
     }

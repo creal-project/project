@@ -14,6 +14,7 @@ public class GameManager : SIngleTon<GameManager>
     public bool IsThereEnemy = false;
     public float enemyDetectDistence;
     public float enemyAttackDistence;
+    
     void FixedUpdate(){
         enemyInRoom = Physics2D.OverlapBoxAll(activatedRoomLocation,new Vector2(15,7),0,whatIsLayer);
         if(enemyInRoom.Length==0){

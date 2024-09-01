@@ -10,7 +10,6 @@ public class Node
     public bool isWall;
     public Node ParentNode;
 
-    // G : �������κ��� �̵��ߴ� �Ÿ�, H : |����|+|����| ��ֹ� �����Ͽ� ��ǥ������ �Ÿ�, F : G + H
     public int x, y, G, H;
     public int F { get { return G + H; } }
 }
@@ -41,6 +40,7 @@ public class PlayerFollow : MonoBehaviour
     public int attackDamage = 2;
     public int currentEnemyRoom = -1;
     bool isroomFound = false;
+    bool isDestSet = false;
 
     float playerDistence;
     private Color enemyColor;
@@ -56,22 +56,29 @@ public class PlayerFollow : MonoBehaviour
             topRight = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x+16),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y+8));
             bottomLeft = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x-16),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y-8));
             isroomFound = true;
+            if(isDestSet == false){
+                dest = new Vector2(GameManager.Instance.roomLocation[currentEnemyRoom].x+Random.Range(-15,16),GameManager.Instance.roomLocation[currentEnemyRoom].y+Random.Range(-7,8));
+                isDestSet = true;
+            }
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
             enemyColor.a = 1f;
-            dest = player.transform.position;
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
             playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
+            Follow();
             if(playerDistence <= GameManager.Instance.enemyDetectDistence){
-                Follow();
+                dest = player.transform.position;
             }
             else{
-                //dest를 룸 내 랜덤좌표로 설정
+                RandPosition();
             }
             if(playerDistence <= GameManager.Instance.enemyAttackDistence){
+                //공격 딜레이 시간
+                //if(cooltime>curenttime){
                 player.GetComponent<Player>().TakeDamage(attackDamage);
+                //}
             }
         }
         else{
@@ -112,7 +119,13 @@ public class PlayerFollow : MonoBehaviour
 
     IEnumerator PlayerMove(List<Node> optimizedPath)
     {
-        if (optimizedPath.Count <= 1) yield break;
+        if (optimizedPath.Count <= 1){
+            isArrived = true;
+            yield break;
+        }
+        else{
+            isArrived = false;
+        }
         var routeList = GetRouteList(optimizedPath);
         int currentRoute = 0;
         Vector2 enemyPosition = transform.position;
@@ -123,30 +136,24 @@ public class PlayerFollow : MonoBehaviour
             {
                 currentRoute++;
                 enemyPosition = transform.position;
-                isArrived = true;
             }
             else{
                 transform.position -= (Vector3)(moveVector * speed * Time.deltaTime);
-                isArrived = false;
             }
-
             yield return null;
         }
     }
-    IEnumerator RandPosition(){
+    private void RandPosition(){
         if(isArrived){
             randPosX = Random.Range(-15,16);
             randPosY = Random.Range(-7,8);
-            dest = new Vector2(randPosX,randPosY);
+            dest = new Vector2(GameManager.Instance.roomLocation[currentEnemyRoom].x+randPosX,GameManager.Instance.roomLocation[currentEnemyRoom].y+randPosY);
         }
-        yield return null;
     }
 
     public void PathFinding()
     {
         isPathFinding = true;
-
-        // NodeArray�� ũ�� �����ְ�, isWall, x, y ����
         sizeX = topRight.x - bottomLeft.x + 1;
         sizeY = topRight.y - bottomLeft.y + 1;
         NodeArray = new Node[sizeX, sizeY];
@@ -163,8 +170,6 @@ public class PlayerFollow : MonoBehaviour
                 NodeArray[i, j] = new Node(isWall, i + bottomLeft.x, j + bottomLeft.y);
             }
         }
-
-        // ���۰� �� ���, ��������Ʈ�� ��������Ʈ, ����������Ʈ �ʱ�ȭ
         StartNode = NodeArray[Mathf.Abs(startPos.x - bottomLeft.x), Mathf.Abs(startPos.y - bottomLeft.y)];
         TargetNode = NodeArray[targetPos.x - bottomLeft.x, targetPos.y - bottomLeft.y];
 
@@ -175,7 +180,6 @@ public class PlayerFollow : MonoBehaviour
 
         while (OpenList.Count > 0 && isPathFinding)
         {
-            // ��������Ʈ �� ���� F�� �۰� F�� ���ٸ� H�� ���� �� ������� �ϰ� ��������Ʈ���� ��������Ʈ�� �ű��
             CurNode = OpenList[0];
             for (int i = 0; i < OpenList.Count; i++)
                 if (OpenList[i].F < CurNode.F || (OpenList[i].F == CurNode.F && OpenList[i].H < CurNode.H))
@@ -185,7 +189,6 @@ public class PlayerFollow : MonoBehaviour
             OpenList.Remove(CurNode);
             ClosedList.Add(CurNode);
 
-            // ������
             if (CurNode == TargetNode)
             {
                 Node TargetCurNode = TargetNode;
@@ -196,8 +199,6 @@ public class PlayerFollow : MonoBehaviour
                 }
                 FinalNodeList.Add(StartNode);
                 FinalNodeList.Reverse();
-
-                //for (int i = 0; i < FinalNodeList.Count; i++) print(i + "��°�� " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
             }
 
             if (allowDiagonal)
@@ -208,7 +209,6 @@ public class PlayerFollow : MonoBehaviour
                 OpenListAdd(CurNode.x + 1, CurNode.y - 1);
             }
 
-            // �� �� �� ��
             OpenListAdd(CurNode.x, CurNode.y + 1);
             OpenListAdd(CurNode.x + 1, CurNode.y);
             OpenListAdd(CurNode.x, CurNode.y - 1);
@@ -219,22 +219,14 @@ public class PlayerFollow : MonoBehaviour
 
     void OpenListAdd(int checkX, int checkY)
     {
-        // �����¿� ������ ����� �ʰ�, ���� �ƴϸ鼭, ��������Ʈ�� ���ٸ�
         if (checkX >= bottomLeft.x && checkX < topRight.x + 1 && checkY >= bottomLeft.y && checkY < topRight.y + 1 && !NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y].isWall && !ClosedList.Contains(NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y]))
         {
-            // �밢�� ����, �� ���̷� ��� �ȵ�
             if (allowDiagonal) if (NodeArray[CurNode.x - bottomLeft.x, checkY - bottomLeft.y].isWall && NodeArray[checkX - bottomLeft.x, CurNode.y - bottomLeft.y].isWall) return;
-
-            // �ڳʸ� �������� ���� ������, �̵� �߿� �������� ��ֹ��� ������ �ȵ�
             if (dontCrossCorner) if (NodeArray[CurNode.x - bottomLeft.x, checkY - bottomLeft.y].isWall || NodeArray[checkX - bottomLeft.x, CurNode.y - bottomLeft.y].isWall) return;
 
-
-            // �̿���忡 �ְ�, ������ 10, �밢���� 14���
             Node NeighborNode = NodeArray[checkX - bottomLeft.x, checkY - bottomLeft.y];
             int MoveCost = CurNode.G + (CurNode.x - checkX == 0 || CurNode.y - checkY == 0 ? 10 : 14);
 
-
-            // �̵������ �̿����G���� �۰ų� �Ǵ� ��������Ʈ�� �̿���尡 ���ٸ� G, H, ParentNode�� ���� �� ��������Ʈ�� �߰�
             if (MoveCost < NeighborNode.G || !OpenList.Contains(NeighborNode))
             {
                 NeighborNode.G = MoveCost;
