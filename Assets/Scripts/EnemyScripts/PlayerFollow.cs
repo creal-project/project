@@ -43,6 +43,7 @@ public class PlayerFollow : MonoBehaviour
     bool isDestSet = false;
 
     float playerDistence;
+    float time;
     private Color enemyColor;
     private void Start(){
         player = GameObject.Find("Player");
@@ -72,7 +73,13 @@ public class PlayerFollow : MonoBehaviour
                 dest = player.transform.position;
             }
             else{
-                RandPosition();
+                if(isArrived){
+                    time+=Time.deltaTime;
+                    if(time>=Random.Range(0.5f,2f)){
+                        RandPosition();
+                        time = 0;
+                    }
+                }
             }
             if(playerDistence <= GameManager.Instance.enemyAttackDistence){
                 //공격 딜레이 시간
@@ -144,11 +151,9 @@ public class PlayerFollow : MonoBehaviour
         }
     }
     private void RandPosition(){
-        if(isArrived){
-            randPosX = Random.Range(-15,16);
+        randPosX = Random.Range(-15,16);
             randPosY = Random.Range(-7,8);
             dest = new Vector2(GameManager.Instance.roomLocation[currentEnemyRoom].x+randPosX,GameManager.Instance.roomLocation[currentEnemyRoom].y+randPosY);
-        }
     }
 
     public void PathFinding()
