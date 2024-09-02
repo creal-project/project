@@ -152,8 +152,8 @@ public class PlayerFollow : MonoBehaviour
     }
     private void RandPosition(){
         randPosX = Random.Range(-15,16);
-            randPosY = Random.Range(-7,8);
-            dest = new Vector2(GameManager.Instance.roomLocation[currentEnemyRoom].x+randPosX,GameManager.Instance.roomLocation[currentEnemyRoom].y+randPosY);
+        randPosY = Random.Range(-7,8);
+        dest = new Vector2(GameManager.Instance.roomLocation[currentEnemyRoom].x+randPosX,GameManager.Instance.roomLocation[currentEnemyRoom].y+randPosY);
     }
 
     public void PathFinding()

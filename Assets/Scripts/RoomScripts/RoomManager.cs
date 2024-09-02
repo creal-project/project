@@ -25,6 +25,7 @@ public class RoomManager : SIngleTon<RoomManager>
     private int[,] roomGrid;
 
     public int roomCount;
+    int roomChanged = 1;
 
     private int Rand;
 
@@ -76,9 +77,19 @@ public class RoomManager : SIngleTon<RoomManager>
         else if (!generationComplete)
         {
             Debug.Log($"Generation complete, {roomCount} rooms created");
-            for (int i = 0; i < roomCount; i++)
-            {
-                GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+            if(roomGenerateCount != roomChanged){
+                GameManager.Instance.roomLocation.Clear();
+                for (int i = 0; i < roomCount; i++)
+                {
+                    GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                }
+                roomChanged++;
+            }
+            else{
+                for (int i = 0; i < roomCount; i++)
+                {
+                    GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                }
             }
             generationComplete = true;
         }
