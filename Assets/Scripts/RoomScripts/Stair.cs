@@ -33,9 +33,13 @@ public class Stair : MonoBehaviour
     {
         if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy)
         {
+
             RoomManager.Instance.RegenerateRooms(); // 방 재생성
-            RoomManager.Instance.maxRooms += 2;
-            RoomManager.Instance.minRooms += 1;
+            if(RoomManager.Instance.maxRooms < 20)
+            {
+                RoomManager.Instance.maxRooms += 2;
+                RoomManager.Instance.minRooms += 1;
+            }
             RoomManager.Instance.roomGenerateCount++;
             Player.transform.position = new Vector3(0, 0, 0);
             Destroy(gameObject);
