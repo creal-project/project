@@ -7,9 +7,9 @@ public class Player : MonoBehaviour
     public GameObject weapon;
 
     public int hp=100;
-    public int hp_max=100;
+    public int Hp_max=100;
     public float atk = 10f;
-    public int m_s;
+    public float m_s;
     public float a_c;
     public int index;
     public int moveSpeed = 10;

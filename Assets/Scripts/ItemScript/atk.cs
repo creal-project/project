@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ATK : MonoBehaviour
 {
-    [SerializeField] float AttAdd = 10f;
+    //
+    [SerializeField] float AtkAdd = 10f;
     GameObject Player;
     void Start()
     {
@@ -15,7 +16,7 @@ public class ATK : MonoBehaviour
    {
         if(collision.collider.CompareTag("Player"))
         {                
-            Player.GetComponent<Player>().atk +=AttAdd;
+            Player.GetComponent<Player>().atk +=AtkAdd;
             Debug.Log("공격력 증가");
             Destroy(gameObject);
         }
