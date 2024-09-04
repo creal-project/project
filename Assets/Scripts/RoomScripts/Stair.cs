@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -8,31 +6,43 @@ public class Stair : MonoBehaviour
     GameObject Player;
     float Range = 3f;
     bool IsIn = false;
+    bool SceneLoaded = false;
+
     private void Start()
     {
         Player = GameObject.Find("Player");
     }
+
     private void Update()
     {
+        
         InRange();
         InterAct();
     }
+
     void InRange()
     {
-        float dis = Vector2.Distance(Player.transform.position,transform.position);
-        if(dis < Range)
+        if (Player != null)
         {
-            IsIn = true;
+            float dis = Vector2.Distance(Player.transform.position, transform.position);
+            IsIn = dis < Range;
         }
-        else {  IsIn = false; }
     }
+
     void InterAct()
     {
-        if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy == true)
+        if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy)
         {
-            //ï¿½ï¿½ï¿½Îµï¿½
-            Debug.Log("¾À ÀÌµ¿");
-            //RoomManager.Instance.RegenerateRooms();
+
+            RoomManager.Instance.RegenerateRooms(); // ¹æ Àç»ý¼º
+            if(RoomManager.Instance.maxRooms < 20)
+            {
+                RoomManager.Instance.maxRooms += 2;
+                RoomManager.Instance.minRooms += 1;
+            }
+            RoomManager.Instance.roomGenerateCount++;
+            Player.transform.position = new Vector3(0, 0, 0);
+            Destroy(gameObject);
         }
     }
 }

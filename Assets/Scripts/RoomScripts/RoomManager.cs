@@ -5,10 +5,10 @@ using UnityEngine;
 public class RoomManager : SIngleTon<RoomManager>
 {
     [SerializeField] GameObject roomPrefab;
-    [SerializeField] private int maxRooms = 15;
-    [SerializeField] private int minRooms = 10;
+    [SerializeField] public int maxRooms = 15;
+    [SerializeField] public int minRooms = 10;
     [SerializeField] private GameObject Stair;
-    
+    public int roomGenerateCount = 1;
 
     // Augmenter la taille des cases
     int roomWidth = 40;  // Anciennement 20
@@ -25,26 +25,39 @@ public class RoomManager : SIngleTon<RoomManager>
     private int[,] roomGrid;
 
     public int roomCount;
+    int roomChanged = 1;
 
-    private int Rand ;
+    private int Rand;
 
     public bool generationComplete = false;
+    public Vector2Int InitialRoomIndex;
 
     private void Start()
     {
+        Start1();
+    }
+    public void Start1()
+    {
         player = GameObject.Find("Player");
-        Rand = Rand = Random.Range(5, 8);
+        Rand = Random.Range(minRooms, maxRooms);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();
 
-        Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
-        StartRoomGenerationFromRoom(initialRoomIndex);
+        InitialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
+        StartRoomGenerationFromRoom(InitialRoomIndex);
     }
 
-    private void Update()
+    public void Update()
     {
-        
+
+        HandleRoomGeneration();
+        if(generationComplete){
+            CurRoom();
+        }
+    }
+    public void HandleRoomGeneration()
+    {
         if (roomQueue.Count > 0 && roomCount < maxRooms && !generationComplete)
         {
             Vector2Int roomIndex = roomQueue.Dequeue();
@@ -64,18 +77,25 @@ public class RoomManager : SIngleTon<RoomManager>
         else if (!generationComplete)
         {
             Debug.Log($"Generation complete, {roomCount} rooms created");
-            for(int i=0;i<roomCount;i++){
-                roomObjects[i].gameObject.tag = $"{i+1}";
-                GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x,roomObjects[i].transform.position.y));
+            if(roomGenerateCount != roomChanged){
+                GameManager.Instance.roomLocation.Clear();
+                for (int i = 0; i < roomCount; i++)
+                {
+                    GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                }
+                roomChanged++;
+            }
+            else{
+                for (int i = 0; i < roomCount; i++)
+                {
+                    GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                }
             }
             generationComplete = true;
         }
-        if(generationComplete){
-            CurRoom();
-        }
     }
 
-    private void StartRoomGenerationFromRoom(Vector2Int roomIndex)
+    public void StartRoomGenerationFromRoom(Vector2Int roomIndex)
     {
         roomQueue.Enqueue(roomIndex);
         int x = roomIndex.x;
@@ -114,7 +134,7 @@ public class RoomManager : SIngleTon<RoomManager>
         newRoom.name = $"Room-{roomCount}";
 
         roomObjects.Add(newRoom);
-        if (roomCount == Rand)
+        if (roomCount == Rand && IsThereStair())
         {
             GameObject myInstance = Instantiate(Stair, newRoom.transform.position, Quaternion.identity);
         }
@@ -124,7 +144,7 @@ public class RoomManager : SIngleTon<RoomManager>
     }
     public void CurRoom()
     {
-        if (CurrentRoom == null)
+        if (CurrentRoom == null )
         {
             float minDistance = float.MaxValue;
             foreach (var room in roomObjects)
@@ -152,13 +172,14 @@ public class RoomManager : SIngleTon<RoomManager>
     }
 
 
-    private void RegenerateRooms()
+    public void RegenerateRooms()
     {
         roomObjects.ForEach(Destroy);
         roomObjects.Clear();
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue.Clear();
         roomCount = 0;
+        Rand = Random.Range(minRooms, maxRooms);
         generationComplete = false;
 
         Vector2Int initialRoomIndex = new Vector2Int(gridSizeX / 2, gridSizeY / 2);
@@ -223,6 +244,18 @@ public class RoomManager : SIngleTon<RoomManager>
         int gridX = gridIndex.x;
         int gridY = gridIndex.y;
         return new Vector3(roomWidth * (gridX - gridSizeX / 2), roomHeight * (gridY - gridSizeY / 2));
+    }
+    private bool IsThereStair()
+    {
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("Stair");
+        if (arr.Length == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void OnDrawGizmos()
