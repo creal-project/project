@@ -27,6 +27,15 @@ public class Spawner : SIngleTon<Spawner>
     }
     public void RandSpawn()
     {
-
+        for (int i = 0; i < RoomManager.Instance.roomCount; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                if (Random.Range(0, 100) < (100 - 20 * j))
+                {
+                    spawnPos[i]
+                }
+            }
+        }
     }
 }
