@@ -33,7 +33,7 @@ public class Spawner : SIngleTon<Spawner>
             {
                 if (Random.Range(0, 100) < (100 - 20 * j))
                 {
-                    spawnPos[i]
+                    //spawnPos[i]
                 }
             }
         }
