@@ -7,6 +7,7 @@ public class Spawner : SIngleTon<Spawner>
     public List<GameObject> enemyList;
     public List<GameObject> itemList;
     public List<Vector2> spawnPos;
+    private Vector2 randPos;
     int roomCount = 0;
     void Start()
     {
@@ -32,6 +33,11 @@ public class Spawner : SIngleTon<Spawner>
             for (int j = 0; j < 4; j++)
             {
                 if (Random.Range(0, 100) < (100 - 20 * j))
+                {
+                    //randPos = new Vector2(Random.Range(0,1),Random.Range(0,1));
+                    Instantiate(enemyList[Random.Range(0,4)],randPos,Quaternion.identity);
+                }
+                if (Random.Range(0, 100) < (40 - 20 * j))
                 {
                     //spawnPos[i]
                 }
