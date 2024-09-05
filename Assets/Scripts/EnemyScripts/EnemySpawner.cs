@@ -7,9 +7,9 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Enemy;
     private void Start()
     {
-        if(Random.value < 0.5f && transform.parent != null && !transform.parent.CompareTag("Room-1"))
+        if(Random.value < 0.5f && transform.parent != null && !transform.parent.CompareTag("1"))
         {
-            int enemyCount = Random.Range(2, 4); // 생성할 적의 수
+            int enemyCount = Random.Range(2, 4);
 
             for (int i = 0; i < enemyCount; i++)
             {
@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
                     transform.position.y + Random.Range(-2.5f, 2.5f),
                     transform.position.z
                 );
-                Instantiate(Enemy, randomPosition, transform.rotation, transform);
+                //Instantiate(Enemy, randomPosition, transform.rotation, transform);
             }
         }
             

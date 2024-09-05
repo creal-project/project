@@ -5,15 +5,13 @@ using UnityEngine;
 public class Spawner : SIngleTon<Spawner>
 {
     public List<GameObject> enemyList;
-    public List<GameObject> itemList;
     public List<Vector2> spawnPos;
-    private Vector2 randPos;
     int roomCount = 0;
     void Start()
     {
         //아이템 추가 코드
     }
-    void Update()
+    void getPosition()
     {
         if (RoomManager.Instance.generationComplete)
         {
@@ -28,19 +26,25 @@ public class Spawner : SIngleTon<Spawner>
     }
     public void RandSpawn()
     {
+        getPosition();
         for (int i = 0; i < RoomManager.Instance.roomCount; i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < 5; j++)
             {
                 if (Random.Range(0, 100) < (100 - 20 * j))
                 {
-                    //randPos = new Vector2(Random.Range(0,1),Random.Range(0,1));
-                    Instantiate(enemyList[Random.Range(0,4)],randPos,Quaternion.identity);
+                    Vector2 randPos = new Vector2(spawnPos[i].x+Random.Range(-5.5f, 5.5f),spawnPos[i].y+Random.Range(-2.5f, 2.5f));
+                    Instantiate(enemyList[Random.Range(0,enemyList.Count)],randPos,Quaternion.identity);
                 }
-                if (Random.Range(0, 100) < (40 - 20 * j))
-                {
-                    //spawnPos[i]
-                }
+            }
+        }
+    }
+    void Update(){
+        bool isCalled=false;
+        if(RoomManager.Instance.generationComplete){
+            if(!isCalled){
+                RandSpawn();
+                isCalled = true;
             }
         }
     }
