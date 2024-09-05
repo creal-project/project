@@ -39,7 +39,7 @@ public class RoomManager : SIngleTon<RoomManager>
     public void Start1()
     {
         player = GameObject.Find("Player");
-        Rand = Random.Range(minRooms, maxRooms);
+        Rand = Random.Range(minRooms-1, maxRooms);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();
@@ -104,6 +104,7 @@ public class RoomManager : SIngleTon<RoomManager>
         roomCount++;
         var initialRoom = Instantiate(roomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"Room-{roomCount}";
+        initialRoom.tag = $"Room-{roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         roomObjects.Add(initialRoom);
     }

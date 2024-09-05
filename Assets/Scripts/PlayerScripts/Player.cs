@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : SIngleTon<Player>
+public class Player : MonoBehaviour
 {
     public GameObject weapon;
 
@@ -59,7 +59,7 @@ public class Player : SIngleTon<Player>
     {
         if (collision.collider.gameObject.CompareTag("enemy"))
         {
-            collision.gameObject.SetActive(false);
+            Destroy(collision.gameObject);
         }
     }
     public void TakeDamage(int attackDamage)
