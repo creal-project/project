@@ -39,7 +39,7 @@ public class RoomManager : SIngleTon<RoomManager>
     public void Start1()
     {
         player = GameObject.Find("Player");
-        Rand = Random.Range(minRooms, maxRooms);
+        Rand = Random.Range(minRooms-1, maxRooms);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();
@@ -82,6 +82,7 @@ public class RoomManager : SIngleTon<RoomManager>
                 for (int i = 0; i < roomCount; i++)
                 {
                     GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                    Spawner.Instance.RandSpawn();
                 }
                 roomChanged++;
             }
@@ -89,6 +90,7 @@ public class RoomManager : SIngleTon<RoomManager>
                 for (int i = 0; i < roomCount; i++)
                 {
                     GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
+                    Spawner.Instance.RandSpawn();
                 }
             }
             generationComplete = true;
@@ -104,6 +106,7 @@ public class RoomManager : SIngleTon<RoomManager>
         roomCount++;
         var initialRoom = Instantiate(roomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"Room-{roomCount}";
+        initialRoom.tag = $"{roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         roomObjects.Add(initialRoom);
     }
@@ -132,6 +135,7 @@ public class RoomManager : SIngleTon<RoomManager>
         
         newRoom.GetComponent<Room>().RoomIndex = roomIndex;
         newRoom.name = $"Room-{roomCount}";
+        newRoom.tag = $"{roomCount}";
 
         roomObjects.Add(newRoom);
         if (roomCount == Rand && IsThereStair())

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : SIngleTon<Player>
+public class Player : MonoBehaviour
 {
     public GameObject weapon;
     public GameObject enemy;
@@ -67,6 +67,7 @@ public class Player : SIngleTon<Player>
         else
         {
             TakeDamage(enemy.GetComponent<EnemyAttack>().attackDamage);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -75,6 +76,12 @@ public class Player : SIngleTon<Player>
     {
         hp -= attackDamage;
     }
+
+    public bool IsDead() // If Player Death --> Scene Change(P_scene Script)
+    {
+        return hp <= 0;
+    }
+
 
 
 

@@ -16,7 +16,7 @@ public class GameManager : SIngleTon<GameManager>
     public float enemyAttackDistence;
     
     void FixedUpdate(){
-        enemyInRoom = Physics2D.OverlapBoxAll(activatedRoomLocation,new Vector2(15,7),0,whatIsLayer);
+        enemyInRoom = Physics2D.OverlapBoxAll(activatedRoomLocation,new Vector2(30,14),0,whatIsLayer);
         if(enemyInRoom.Length==0){
             isAllowToMove = true;
         }
