@@ -5,7 +5,10 @@ public class EnemyAttack : MonoBehaviour
     public GameObject player;           
     public float attackRange = 2.0f;   
     public int attackDamage = 2;       
-    private int playerHP = 10;         
+    private int playerHP = 10;
+
+    public GameObject enemy;
+    public int enemyHP = 10;
 
     void Update()
     {
@@ -23,6 +26,8 @@ public class EnemyAttack : MonoBehaviour
     // void Attack()
     // {
     //     player.TakeDamage(attackDamage);
-        
+
     // }
+
+   
 }
