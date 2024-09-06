@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
     private int playerHP = 10;
 
     public GameObject enemy;
-    public int enemyHP = 10;
+    public float enemyHP = 10;
 
     void Update()
     {

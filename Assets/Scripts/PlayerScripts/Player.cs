@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     public int hp=100;
     public int Hp_max=100;
-    public int atk = 10;
+    public float atk = 10;
     public float m_s;
     public float a_c;
     public int index;
