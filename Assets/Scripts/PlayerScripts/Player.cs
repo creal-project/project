@@ -67,6 +67,12 @@ public class Player : MonoBehaviour
         hp -= attackDamage;
     }
 
+    public bool IsDead() // If Player Death --> Scene Change(P_scene Script)
+    {
+        return hp <= 0;
+    }
+
+
 
 
     /*void interactions()
