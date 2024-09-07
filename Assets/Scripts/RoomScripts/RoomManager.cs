@@ -79,19 +79,22 @@ public class RoomManager : SIngleTon<RoomManager>
             Debug.Log($"Generation complete, {roomCount} rooms created");
             if(roomGenerateCount != roomChanged){
                 GameManager.Instance.roomLocation.Clear();
+                Spawner.Instance.spawnPos.Clear();
                 for (int i = 0; i < roomCount; i++)
                 {
                     GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
-                    Spawner.Instance.RandSpawn();
+                    Spawner.Instance.spawnPos.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
                 }
+                Spawner.Instance.RandSpawn();
                 roomChanged++;
             }
             else{
                 for (int i = 0; i < roomCount; i++)
                 {
                     GameManager.Instance.roomLocation.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
-                    Spawner.Instance.RandSpawn();
+                    Spawner.Instance.spawnPos.Add(new Vector2(roomObjects[i].transform.position.x, roomObjects[i].transform.position.y));
                 }
+                Spawner.Instance.RandSpawn();
             }
             generationComplete = true;
         }

@@ -10,24 +10,13 @@ public class Spawner : SIngleTon<Spawner>
     int roomCount = 0;
     bool hasSpawned = false;
 
-    void getPosition()
+    void Start()
     {
-        if (RoomManager.Instance.generationComplete)
-        {
-            if (RoomManager.Instance.roomGenerateCount != roomCount)
-            {
-                spawnPos = GameManager.Instance.roomLocation.ToList();
-                roomCount++;
-                spawnPos.RemoveAt(0); // Assuming this is safe to remove
-                // spawnPos.RemoveAt(stairPositionIndex); // Make sure this index is valid
-            }
-        }
+        // 아이템 추가 코드
     }
-
     public void RandSpawn()
     {
-        getPosition();
-
+        spawnPos.RemoveAt(0);
         if (spawnPos == null || spawnPos.Count == 0)
         {
             Debug.LogError("Spawn positions are empty or not set!");
@@ -40,7 +29,7 @@ public class Spawner : SIngleTon<Spawner>
             return;
         }
 
-        for (int i = 0; i < RoomManager.Instance.roomCount-1; i++)
+        for (int i = 0; i < RoomManager.Instance.roomCount; i++)
         {
             // Make sure the spawnPos list has enough elements for the room count
             if (i >= spawnPos.Count)
@@ -69,14 +58,6 @@ public class Spawner : SIngleTon<Spawner>
                     }
                 }
             }
-        }
-    }
-    void Update()
-    {
-        if (RoomManager.Instance.generationComplete && !hasSpawned)
-        {
-            //RandSpawn();
-            hasSpawned = true; // Ensure spawning happens only once
         }
     }
 }
