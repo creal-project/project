@@ -3,11 +3,8 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     public GameObject player;           
-    public float attackRange = 2.0f;   
-    public int attackDamage = 2;       
-    private int playerHP = 10;
-
-    public GameObject enemy;
+    public float attackRange = 2.0f;
+    public int attackDamage = 2;
     public float enemyHP = 10;
 
     void Update()
@@ -17,17 +14,13 @@ public class EnemyAttack : MonoBehaviour
         {
            // Attack();
         }
+        if(enemyHP<=0){
+            Destroy(this.gameObject);
+        }
     }
 
     private void Start()
     {
         player = GameObject.Find("Player");
     }
-    // void Attack()
-    // {
-    //     player.TakeDamage(attackDamage);
-
-    // }
-
-   
 }

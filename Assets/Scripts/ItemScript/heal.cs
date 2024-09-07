@@ -16,21 +16,18 @@ public class heal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Player.GetComponent<Player>().hp >= Player.GetComponent<Player>().Hp_max){
+            Player.GetComponent<Player>().hp = Player.GetComponent<Player>().Hp_max;
+        }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
-            if (Player.GetComponent<Player>().hp != Player.GetComponent<Player>().Hp_max)
+            if (Player.GetComponent<Player>().hp <= Player.GetComponent<Player>().Hp_max)
             {
                 Player.GetComponent<Player>().hp += heal_HP;
-                Debug.Log("체력 회복");
                 Destroy(gameObject);
-            }
-            else
-            {
-                Debug.Log("풀피");
             }
         }
     }

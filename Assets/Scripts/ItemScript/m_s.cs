@@ -12,7 +12,6 @@ public class m_s : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-        GetBuff = false;
     }
 
     // Update is called once per frame
@@ -20,16 +19,7 @@ public class m_s : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            GetBuff = true;
-        }
-    }
-
-    public void Buff()
-    {
-        if (GetBuff == true)
-        {
-            Player.GetComponent<Player>().m_s += M_SAdd;
-            Debug.Log("이동 속도 증가 증가");
+            Player.GetComponent<Player>().movement_speed += M_SAdd;
             Destroy(gameObject);
         }
     }

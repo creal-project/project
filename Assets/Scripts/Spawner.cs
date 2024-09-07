@@ -6,14 +6,8 @@ using UnityEngine;
 public class Spawner : SIngleTon<Spawner>
 {
     public List<GameObject> enemyList;
+    public List<GameObject> itemList;
     public List<Vector2> spawnPos;
-    int roomCount = 0;
-    bool hasSpawned = false;
-
-    void Start()
-    {
-        // 아이템 추가 코드
-    }
     public void RandSpawn()
     {
         spawnPos.RemoveAt(0);
@@ -29,7 +23,7 @@ public class Spawner : SIngleTon<Spawner>
             return;
         }
 
-        for (int i = 0; i < RoomManager.Instance.roomCount; i++)
+        for (int i = 0; i < RoomManager.Instance.roomCount-1; i++)
         {
             // Make sure the spawnPos list has enough elements for the room count
             if (i >= spawnPos.Count)
