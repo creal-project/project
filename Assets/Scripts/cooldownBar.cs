@@ -31,6 +31,10 @@ public class CooldownBar : MonoBehaviour
             float cooldownRatio = Mathf.InverseLerp(0, player.attackCooldown, player.currentAttackCooldown);
             cdbar.value = Mathf.SmoothDamp(cdbar.value, cooldownRatio, ref currentVelocity, smoothTime);
         }
+        if (player.currentAttackCooldown == 0)
+        {
+            cdbar.value = 1;
+        }
     }
 
     private void UpdateCd()

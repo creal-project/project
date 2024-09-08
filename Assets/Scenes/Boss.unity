@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpbar: {fileID: 923081883}
-  smoothTime: 0.3
+  smoothTime: 0.5
 --- !u!1 &956727200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cdbar: {fileID: 1901380774}
-  smoothTime: 0.3
+  smoothTime: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
