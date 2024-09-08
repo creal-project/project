@@ -185,6 +185,12 @@ public class RoomManager : SIngleTon<RoomManager>
     {
         roomObjects.ForEach(Destroy);
         roomObjects.Clear();
+        GameObject.Find("Main Camera").transform.position= new Vector3(0, 0, 0);
+        GameObject[] items = GameObject.FindGameObjectsWithTag("item");
+        for(int i = 0;i <items.Length;i++)
+        {
+            Destroy(items[i]);
+        }
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue.Clear();
         roomCount = 0;
