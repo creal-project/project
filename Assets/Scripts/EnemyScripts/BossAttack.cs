@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
-    public GameObject projectilePrefab; // 발사체 프리팹
+    public GameObject projectilePrefab;
     public Transform firePoint;
-    public float projectileSpeed = 10f; // 발사체 속도
-    public float fireRate = 1f; // 발사 속도
-    public int numberOfProjectiles = 8; // 한번에 발사할 발사체 수
+    public float projectileSpeed = 10f;
+    public float fireRate = 1f;
+    public int numberOfProjectiles = 8; 
 
     private float timeSinceLastFire;
 
@@ -25,20 +25,22 @@ public class BossAttack : MonoBehaviour
     void FireProjectiles()
     {
         float angleStep = 360f / numberOfProjectiles;
-        float angle = 0f;
+        float startAngle = 0f;
 
         for (int i = 0; i < numberOfProjectiles; i++)
         {
-            float projectileDirX = firePoint.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
-            float projectileDirY = firePoint.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
+            float angle = startAngle + i * angleStep;
+            Vector2 projectileDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized * projectileSpeed;
 
-            Vector3 projectileVector = new Vector3(projectileDirX, projectileDirY, 0f);
-            Vector2 projectileMoveDirection = (projectileVector - firePoint.position).normalized * projectileSpeed;
+            GameObject tmpObj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D rb = tmpObj.GetComponent<Rigidbody2D>();
+            rb.velocity = projectileDirection;
 
-            GameObject tmpObj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            tmpObj.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y);
-
-            angle += angleStep;
+            Collider2D collider = tmpObj.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.isTrigger = true; 
+            }
         }
     }
 }

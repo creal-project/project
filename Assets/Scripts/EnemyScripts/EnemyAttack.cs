@@ -2,25 +2,22 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public GameObject player;           
-    public float attackRange = 2.0f;
-    public int attackDamage = 2;
-    public float enemyHP = 10;
+    public float enemyHP = 50;
+    public float attackDamage = 10; 
 
-    void Update()
+    public void TakeDamage(float damage)
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (distanceToPlayer <= attackRange)
+        enemyHP -= damage;
+
+        if (enemyHP <= 0)
         {
-           // Attack();
-        }
-        if(enemyHP<=0){
-            Destroy(this.gameObject);
+            Die();
         }
     }
 
-    private void Start()
+    private void Die()
     {
-        player = GameObject.Find("Player");
+        Debug.Log("Enemy died!");
+        Destroy(gameObject);
     }
 }

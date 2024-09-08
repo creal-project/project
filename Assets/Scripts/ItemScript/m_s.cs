@@ -19,7 +19,7 @@ public class m_s : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Player.GetComponent<Player>().movement_speed += M_SAdd;
+            Player.GetComponent<Player>().movementSpeed += M_SAdd;
             Destroy(gameObject);
         }
     }

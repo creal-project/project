@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class a_c : MonoBehaviour
 {
-    [SerializeField] float a_c_decrease = 10f;
+    [SerializeField] float attackCooldown_decrease = 10f;
     GameObject Player;
     void Start()
     {
@@ -14,7 +14,7 @@ public class a_c : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Player.GetComponent<Player>().a_c -= a_c_decrease;
+            Player.GetComponent<Player>().attackCooldown -= attackCooldown_decrease;
             Destroy(gameObject);
         }
     }

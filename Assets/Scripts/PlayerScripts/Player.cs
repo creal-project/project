@@ -7,62 +7,106 @@ public class Player : MonoBehaviour
     public GameObject weapon;
     public GameObject enemy;
 
-    public int hp=100;
-    public int Hp_max=100;
-    public float atk = 10; //attack
-    public float movement_speed; //movement speed
-    public float a_c; //attack cooldown
-    public int moveSpeed = 10;
-    Rigidbody2D rb;
+    public int hp = 100;
+    public int Hp_max = 100;
+    public float atk = 10; // 공격력
+    public float movementSpeed = 10;
+    public float attackRadius = 2.0f;
+    public float attackCooldown = 2f;
+    public LayerMask enemyLayer; // 적 레이어
 
-    public bool attacking;
+    public delegate void HpChanged(); 
+    public delegate void CdChanged(); 
+    public event HpChanged OnHpChanged; // 체력 변경 이벤트
+    public event CdChanged OnCdChanged; // 쿨타임 변경 이벤트
+
+    private Rigidbody2D rb;
+    private bool canAttack = true;
+    public float currentAttackCooldown = 0f; // 현재 쿨다운 변수
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-    }    private void Update()
+    }
+
+    void Update()
     {
         PlayerMove();
-        attack();
+        HandleAttack();
     }
+
     void PlayerMove()
     {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis("Vertical");
         Vector2 moveVector = new Vector2(hor, ver).normalized;
-        transform.position += (Vector3)moveVector * moveSpeed *movement_speed* Time.deltaTime;
+        transform.position += (Vector3)moveVector * movementSpeed * Time.deltaTime;
     }
 
-    void attack()
+    void HandleAttack()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && canAttack)
         {
-            attacking = true;
+            Attack();
         }
-        else{
-            attacking = false;
+
+        if (!canAttack)
+        {
+            currentAttackCooldown += Time.deltaTime;
+            if (currentAttackCooldown >= attackCooldown)
+            {
+                canAttack = true;
+                currentAttackCooldown = 0f;
+                OnCdChanged?.Invoke();
+            }
         }
     }
+
+    void Attack()
+    {
+        canAttack = false;
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayer);
+        foreach (Collider2D target in targets)
+        {
+            if (target != null)
+            {
+                EnemyAttack enemyAttack = target.GetComponent<EnemyAttack>();
+                BossController bossController = target.GetComponent<BossController>();
+                
+                if (enemyAttack != null)
+                {
+                    enemyAttack.TakeDamage(atk);
+                    Debug.Log($"{atk} damage to Enemy");
+                }
+                else if (bossController != null)
+                {
+                    bossController.TakeDamage(atk);
+                    Debug.Log($"{atk} damage to Boss");
+                }
+            }
+        }
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.CompareTag("enemy") || attacking==true)
+        if (collision.collider.gameObject.CompareTag("enemy"))
         {
-            collision.gameObject.GetComponent<EnemyAttack>().enemyHP -= atk;
-        }
-        else
-        {
-            TakeDamage(enemy.GetComponent<EnemyAttack>().attackDamage);
-            Destroy(collision.gameObject);
+            EnemyAttack enemyAttack = collision.gameObject.GetComponent<EnemyAttack>();
+            if (enemyAttack != null)
+            {
+                TakeDamage(enemyAttack.attackDamage);
+                Destroy(collision.gameObject); 
+            }
         }
     }
 
-
-    public void TakeDamage(int attackDamage)
+    public void TakeDamage(float attackDamage)
     {
-        hp -= attackDamage;
+        hp -= (int)attackDamage;
+        OnHpChanged?.Invoke(); // 체력 변경 이벤트 호출
     }
 
-    public bool IsDead() // If Player Death --> Scene Change(P_scene Script)
+    public bool IsDead() // 플레이어 사망 체크
     {
         return hp <= 0;
     }

@@ -15,7 +15,10 @@ TagManager:
   - 9
   - 10
   - enemy
-  - Stair
+  - stair
+  - Wall
+  - bullet
+  - Boss
   layers:
   - Default
   - TransparentFX
