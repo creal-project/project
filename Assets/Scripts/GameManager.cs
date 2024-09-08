@@ -10,6 +10,7 @@ public class GameManager : SIngleTon<GameManager>
     public Vector2 activatedRoomLocation = new Vector2(0,0);
     public int currentPlayerRoom;
     public bool isAllowToMove = false;
+    public int itemSpawnCount = 0;
     public LayerMask whatIsLayer;
     public bool IsThereEnemy = false;
     public float enemyDetectDistence;
@@ -19,9 +20,15 @@ public class GameManager : SIngleTon<GameManager>
         enemyInRoom = Physics2D.OverlapBoxAll(activatedRoomLocation,new Vector2(30,14),0,whatIsLayer);
         if(enemyInRoom.Length==0){
             isAllowToMove = true;
+            if(activatedRoomLocation != new Vector2(0,0)){
+                if(!Spawner.Instance.itemSpawned){
+                    Spawner.Instance.itemRandSpawn();
+                }
+            }
         }
         else{
             isAllowToMove = false;
+            Spawner.Instance.itemSpawned = false;
         }
         if(RoomManager.Instance.generationComplete){
             FindPlayerRoom();

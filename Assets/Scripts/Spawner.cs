@@ -8,6 +8,7 @@ public class Spawner : SIngleTon<Spawner>
     public List<GameObject> enemyList;
     public List<GameObject> itemList;
     public List<Vector2> spawnPos;
+    public bool itemSpawned=false;
     public void RandSpawn()
     {
         spawnPos.RemoveAt(0);
@@ -52,6 +53,15 @@ public class Spawner : SIngleTon<Spawner>
                     }
                 }
             }
+        }
+    }
+    public void itemRandSpawn(){
+        itemSpawned = true;
+        GameObject itemPrefab = itemList[Random.Range(0,itemList.Count)];
+        Vector2 itemSpawn = GameManager.Instance.activatedRoomLocation;
+        //if(GameManager.Instance.activatedRoomLocation == )
+        if(Random.Range(0,2)>=0){
+            Instantiate(itemPrefab,new Vector3(itemSpawn.x+Random.Range(-1f,1f),itemSpawn.y+Random.Range(-1f,1f),0),Quaternion.identity);
         }
     }
 }
