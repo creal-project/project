@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float enemyHP = 50;
     public float attackDamage = 10; 

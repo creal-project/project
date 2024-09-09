@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayer);
         foreach (Collider2D target in targets)
         {
+<<<<<<< Updated upstream
             if (target != null)
             {
                 EnemyAttack enemyAttack = target.GetComponent<EnemyAttack>();
@@ -84,6 +85,14 @@ public class Player : MonoBehaviour
                     Debug.Log($"{atk} damage to Boss");
                 }
             }
+=======
+            collision.gameObject.GetComponent<Enemy>().enemyHP -= atk;
+        }
+        else
+        {
+            TakeDamage(enemy.GetComponent<Enemy>().attackDamage);
+            Destroy(collision.gameObject);
+>>>>>>> Stashed changes
         }
     }
 
