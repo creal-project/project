@@ -186,11 +186,7 @@ public class RoomManager : SIngleTon<RoomManager>
         roomObjects.ForEach(Destroy);
         roomObjects.Clear();
         GameObject.Find("Main Camera").transform.position= new Vector3(0, 0, 0);
-        GameObject[] items = GameObject.FindGameObjectsWithTag("item");
-        for(int i = 0;i <items.Length;i++)
-        {
-            Destroy(items[i]);
-        }
+        
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue.Clear();
         roomCount = 0;
@@ -262,7 +258,7 @@ public class RoomManager : SIngleTon<RoomManager>
     }
     private bool IsThereStair()
     {
-        GameObject[] arr = GameObject.FindGameObjectsWithTag("Stair");
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("stair");
         if (arr.Length == 0)
         {
             return true;
