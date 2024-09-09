@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5240577296695663100}
   m_Layer: 0
   m_Name: AttAdd
-  m_TagString: Untagged
+  m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3372fddb3e767f4a8c8a87ecab0c9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AtkAdd: 10
+  atkAdd: 10
+  player: {fileID: 0}
 --- !u!61 &5240577296695663100
 BoxCollider2D:
   m_ObjectHideFlags: 0

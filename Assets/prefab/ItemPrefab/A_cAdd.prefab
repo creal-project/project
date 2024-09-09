@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3124461123326505955}
   m_Layer: 0
   m_Name: A_cAdd
-  m_TagString: Untagged
+  m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a23882e02f12c3429c9435ab9eb9f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a_c_decrease: 10
+  attackCooldown_decrease: 10
