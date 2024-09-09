@@ -6,7 +6,7 @@ public class P_Hpbar : MonoBehaviour
     [SerializeField]
     private Slider hpbar;
     [SerializeField]
-    private float smoothTime = 0.3f;
+    private float smoothTime = 0.1f;
 
     private Player player; 
     private float targetHp;

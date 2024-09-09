@@ -34,7 +34,7 @@ public class Stair : MonoBehaviour
         if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy)
         {
 
-            RoomManager.Instance.RegenerateRooms(); // �� �����
+            RoomManager.Instance.RegenerateRooms();
             if(RoomManager.Instance.maxRooms < 20)
             {
                 RoomManager.Instance.maxRooms += 2;

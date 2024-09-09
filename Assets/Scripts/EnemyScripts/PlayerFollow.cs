@@ -45,6 +45,8 @@ public class PlayerFollow : MonoBehaviour
     float playerDistence;
     float time;
     private Color enemyColor;
+    private float cooltime =2f;
+    private float currenttime =0;
     private void Start(){
         player = GameObject.Find("Player");
         //enemyColor = this.gameObject.GetComponent<SpriteRenderer>().color;
@@ -52,6 +54,7 @@ public class PlayerFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
+        currenttime += Time.deltaTime;
         if(!isroomFound&&RoomManager.Instance.generationComplete){
             FindEnemyRoom();
             topRight = new Vector2Int((int)(GameManager.Instance.roomLocation[currentEnemyRoom].x+16),(int)(GameManager.Instance.roomLocation[currentEnemyRoom].y+8));
@@ -84,16 +87,18 @@ public class PlayerFollow : MonoBehaviour
                 Follow();
             }
             if(playerDistence <= GameManager.Instance.enemyAttackDistence){
-                //공격 딜레이 시간
-                //if(cooltime>curenttime){
-                player.GetComponent<Player>().TakeDamage(attackDamage);
-                //}
+                
+                if(cooltime<currenttime){
+                    player.GetComponent<Player>().TakeDamage(attackDamage);
+                    currenttime = 0f;
+                }
             }
         }
         else{
             this.gameObject.GetComponent<SpriteRenderer>().color = new Color(56,56,56);
             //enemyColor.a = 150f;
         }
+        
     }
     private void Follow()
     {

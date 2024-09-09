@@ -87,18 +87,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.CompareTag("enemy"))
-        {
-            EnemyAttack enemyAttack = collision.gameObject.GetComponent<EnemyAttack>();
-            if (enemyAttack != null)
-            {
-                TakeDamage(enemyAttack.attackDamage);
-                Destroy(collision.gameObject); 
-            }
-        }
-    }
+    // public void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.collider.gameObject.CompareTag("enemy"))
+    //     {
+    //         EnemyAttack enemyAttack = collision.gameObject.GetComponent<EnemyAttack>();
+    //         if (enemyAttack != null)
+    //         {
+    //             TakeDamage(enemyAttack.attackDamage);
+    //         }
+    //     }
+    // }
 
     public void TakeDamage(float attackDamage)
     {
