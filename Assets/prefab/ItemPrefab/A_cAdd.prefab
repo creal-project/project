@@ -314,9 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a23882e02f12c3429c9435ab9eb9f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  attackCooldown_decrease: 10
-=======
   a_c_decrease: 10
 --- !u!1 &6836294289046083362
 GameObject:
@@ -402,4 +399,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
->>>>>>> Stashed changes
