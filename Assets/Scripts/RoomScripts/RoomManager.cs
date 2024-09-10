@@ -110,7 +110,6 @@ public class RoomManager : SIngleTon<RoomManager>
         roomCount++;
         var initialRoom = Instantiate(roomPrefab, GetPositionFromGridIndex(roomIndex), Quaternion.identity);
         initialRoom.name = $"Room-{roomCount}";
-        initialRoom.tag = $"{roomCount}";
         initialRoom.GetComponent<Room>().RoomIndex = roomIndex;
         roomObjects.Add(initialRoom);
     }
@@ -258,7 +257,7 @@ public class RoomManager : SIngleTon<RoomManager>
     }
     private bool IsThereStair()
     {
-        GameObject[] arr = GameObject.FindGameObjectsWithTag("stair");
+        GameObject[] arr = GameObject.FindGameObjectsWithTag("Stair");
         if (arr.Length == 0)
         {
             return true;

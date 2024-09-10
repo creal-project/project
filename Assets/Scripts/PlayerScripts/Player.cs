@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     public float attackRadius = 2.0f;
     public float attackCooldown = 2f;   
     public LayerMask enemyLayer; // 적 레이어
-
+    Animator animator;
+    SpriteRenderer spriteRenderer;
     public delegate void HpChanged(); 
     public delegate void CdChanged(); 
     public event HpChanged OnHpChanged; // 체력 변경 이벤트
@@ -24,6 +25,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -34,10 +37,26 @@ public class Player : MonoBehaviour
 
     void PlayerMove()
     {
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
+        float hor = Input.GetAxisRaw("Horizontal");
+        float ver = Input.GetAxisRaw("Vertical");
+        if(ver != 0 || hor !=  0)
+        {
+            if(hor<0)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else{
+                spriteRenderer.flipX = false;
+            }
+            animator.SetBool("MoveBool",true);
+            
+        }
+        else{
+            animator.SetBool("MoveBool",false);
+        }
         Vector2 moveVector = new Vector2(hor, ver).normalized;
         transform.position += (Vector3)moveVector * movementSpeed * Time.deltaTime;
+        
     }
 
     void HandleAttack()

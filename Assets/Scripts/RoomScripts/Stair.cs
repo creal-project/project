@@ -31,7 +31,7 @@ public class Stair : MonoBehaviour
 
     void InterAct()
     {
-        if (IsIn && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.IsThereEnemy)
+        if (IsIn && Input.GetKeyDown(KeyCode.E))
         {
 
             RoomManager.Instance.RegenerateRooms();
@@ -44,6 +44,11 @@ public class Stair : MonoBehaviour
             for(int i = 0;i <items.Length;i++)
             {
                 Destroy(items[i]);
+            }
+            GameObject[] enemy = GameObject.FindGameObjectsWithTag("enemy");
+            for(int i =0;i<enemy.Length;i++)
+            {
+                Destroy(enemy[i]);
             }
             RoomManager.Instance.roomGenerateCount++;
             Player.transform.position = new Vector3(0, 0, 0);
