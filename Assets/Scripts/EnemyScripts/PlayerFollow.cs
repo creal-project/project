@@ -41,7 +41,8 @@ public class PlayerFollow : MonoBehaviour
     public int currentEnemyRoom = -1;
     bool isroomFound = false;
     bool isDestSet = false;
-
+    Animator animator;
+    SpriteRenderer spriteRenderer;
     float playerDistence;
     float time;
     private Color enemyColor;
@@ -50,6 +51,8 @@ public class PlayerFollow : MonoBehaviour
     private void Start(){
         player = GameObject.Find("Player");
         //enemyColor = this.gameObject.GetComponent<SpriteRenderer>().color;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -152,6 +155,13 @@ public class PlayerFollow : MonoBehaviour
                 enemyPosition = transform.position;
             }
             else{
+                if(moveVector.x <0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else{
+                    spriteRenderer.flipX = true;
+                }
                 transform.position -= (Vector3)(moveVector * speed * Time.deltaTime);
             }
             yield return null;

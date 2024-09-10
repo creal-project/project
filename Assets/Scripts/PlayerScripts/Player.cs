@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) && canAttack)
         {
+            Debug.Log("@@");
             Attack();
         }
 
@@ -82,8 +83,10 @@ public class Player : MonoBehaviour
     {
         canAttack = false;
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRadius, enemyLayer);
+        Debug.Log("123");
         foreach (Collider2D target in targets)
         {
+            
             if (target != null)
             {
                 Enemy enemyAttack = target.GetComponent<Enemy>();
