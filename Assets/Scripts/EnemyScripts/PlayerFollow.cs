@@ -66,7 +66,7 @@ public class PlayerFollow : MonoBehaviour
             }
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
+            //this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
             enemyColor.a = 1f;
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
@@ -95,7 +95,7 @@ public class PlayerFollow : MonoBehaviour
             }
         }
         else{
-            this.gameObject.GetComponent<SpriteRenderer>().color = new Color(56,56,56);
+            //this.gameObject.GetComponent<SpriteRenderer>().color = new Color(56,56,56);
             //enemyColor.a = 150f;
         }
         
