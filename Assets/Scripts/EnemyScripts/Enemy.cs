@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public force knockback;
     public float enemyHP = 20;
 
-    public void Start()
+    public void Awake()
     {
         player = GameObject.Find("Player");
         enemyHP += RoomManager.Instance.roomGenerateCount*10;
