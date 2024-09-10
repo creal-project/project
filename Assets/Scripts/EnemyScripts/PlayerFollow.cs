@@ -80,6 +80,7 @@ public class PlayerFollow : MonoBehaviour
             else{
                 if(isArrived){
                     time+=Time.deltaTime;
+                    animator.SetBool("isMoving",false);
                     if(time>=Random.Range(0.5f,2f)){
                         RandPosition();
                         time = 0;
@@ -142,6 +143,7 @@ public class PlayerFollow : MonoBehaviour
         }
         else{
             isArrived = false;
+            animator.SetBool("isMoving",true);
         }
         var routeList = GetRouteList(optimizedPath);
         int currentRoute = 0;

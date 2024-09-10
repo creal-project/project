@@ -8,6 +8,19 @@ TagManager:
   - item
   - Undefined
   - Stair
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 112
+  - 12
   layers:
   - Default
   - TransparentFX
@@ -15,8 +28,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - item
+  - enemy
   - 
   - 
   - 

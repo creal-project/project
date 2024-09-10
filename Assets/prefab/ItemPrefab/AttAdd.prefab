@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4787176191540452575}
   - component: {fileID: 8785346254792083358}
   - component: {fileID: 5240577296695663100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttAdd
   m_TagString: item
   m_Icon: {fileID: 0}
@@ -76,7 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
+  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5403959361454567623}
   - component: {fileID: 6474765813995058481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IMG_1174
   m_TagString: Untagged
   m_Icon: {fileID: 0}
