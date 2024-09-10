@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class a_c : MonoBehaviour
 {
-    [SerializeField] float attackCooldown_decrease = 10f;
+    [SerializeField] float attackCooldown_decrease = 1f;
     GameObject Player;
     void Start()
     {

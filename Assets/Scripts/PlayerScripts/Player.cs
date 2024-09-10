@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject weapon;
-    public GameObject enemy;
-
     public int hp = 100;
     public int Hp_max = 100;
     public float atk = 10; // 공격력
     public float movementSpeed = 10;
     public float attackRadius = 2.0f;
-    public float attackCooldown = 2f;
+    public float attackCooldown = 2f;   
     public LayerMask enemyLayer; // 적 레이어
 
     public delegate void HpChanged(); 

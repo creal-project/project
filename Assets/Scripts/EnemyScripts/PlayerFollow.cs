@@ -37,7 +37,7 @@ public class PlayerFollow : MonoBehaviour
     private int randPosY;
     public float speed;
     public bool isArrived = false;
-    public int attackDamage = 2;
+    public int attackDamage = 50;
     public int currentEnemyRoom = -1;
     bool isroomFound = false;
     bool isDestSet = false;

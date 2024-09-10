@@ -33,7 +33,7 @@ public class Spawner : SIngleTon<Spawner>
                 continue;
             }
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < 3; j++)
             {
                 if (Random.Range(0, 100) < (100 - 20 * j))
                 {
