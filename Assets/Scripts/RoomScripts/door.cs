@@ -11,7 +11,7 @@ public class Door : MonoBehaviour
     public float a = 9.5f;
     public bool top, left, right, bottom;
     
-    float detectionRange = 3f;
+    float detectionRange = 4f;
     GameObject Camera;
     private void Start()
     {
@@ -45,7 +45,6 @@ public class Door : MonoBehaviour
     {
         if (GameManager.Instance.isAllowToMove)
         {
-
             if (top && Input.GetKeyDown(KeyCode.E))
             {
                 player.transform.Translate(Vector2.up + new Vector2(0, a));

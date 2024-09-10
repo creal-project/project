@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float atk = 10; // 공격력
     public float movementSpeed = 10;
     public float attackRadius = 2.0f;
-    public float attackCooldown = 2f;   
+    public float attackCooldown = 1f;
     public LayerMask enemyLayer; // 적 레이어
     Animator animator;
     SpriteRenderer spriteRenderer;
@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private bool canAttack = true;
     public float currentAttackCooldown = 0f; // 현재 쿨다운 변수
 
+    public bool isHit = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     {
         PlayerMove();
         HandleAttack();
+        SetLimit();
     }
 
     void PlayerMove()
@@ -95,6 +98,7 @@ public class Player : MonoBehaviour
                 if (enemyAttack != null)
                 {
                     enemyAttack.TakeDamage(atk);
+                    isHit = true;
                     Debug.Log($"{atk} damage to Enemy");
                 }
                 else if (bossController != null)
@@ -103,6 +107,17 @@ public class Player : MonoBehaviour
                     Debug.Log($"{atk} damage to Boss");
                 }
             }
+        }
+    }
+    public void SetLimit(){
+        if(attackCooldown<0.4f){
+            attackCooldown = 0.4f;
+        }
+        if(Hp_max>200){
+            Hp_max = 200;
+        }
+        if(atk>100){
+            atk = 100;
         }
     }
 

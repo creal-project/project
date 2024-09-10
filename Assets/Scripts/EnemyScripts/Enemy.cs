@@ -1,10 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float enemyHP = 50;
-    public float attackDamage = 10; 
+    private GameObject player;
+    public force knockback;
+    public float enemyHP = 20;
 
+    public void Start()
+    {
+        player = GameObject.Find("Player");
+        enemyHP += RoomManager.Instance.roomGenerateCount*10;
+    }
     public void TakeDamage(float damage)
     {
         enemyHP -= damage;
@@ -13,6 +20,15 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+    }
+    private void Update()
+    {
+        // if (player.GetComponent<Player>().isHit)
+        // {
+        //     if(enemyHP != 20){
+        //         knockback.ApplyKnockback(-(player.transform.position-this.transform.position));
+        //     }
+        // }
     }
 
     private void Die()

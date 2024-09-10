@@ -18,6 +18,7 @@ public class RoomManager : SIngleTon<RoomManager>
     int gridSizeY = 10;
     public GameObject CurrentRoom;
     public Vector2 stairPosition;
+    public int stairIndex;
 
     private List<GameObject> roomObjects = new List<GameObject>();
 
@@ -145,7 +146,9 @@ public class RoomManager : SIngleTon<RoomManager>
         if (roomCount == Rand && IsThereStair())
         {
             GameObject myInstance = Instantiate(Stair, newRoom.transform.position, Quaternion.identity);
+            //tag=$"{roomCount}"
             stairPosition = newRoom.transform.position;
+            stairIndex = roomCount;
         }
         OpenDoors(newRoom, x, y);
 

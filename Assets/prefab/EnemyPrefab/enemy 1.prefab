@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1359952410528119823}
   - component: {fileID: 5236924582399703574}
+  - component: {fileID: 1926180758647178141}
   - component: {fileID: 2876847050737650512}
   - component: {fileID: 2742671221688107884}
   - component: {fileID: 2535165859922520916}
-  - component: {fileID: 1926180758647178141}
   - component: {fileID: 2134830943455453776}
+  - component: {fileID: -429039290910794804}
   m_Layer: 7
   m_Name: enemy 1
   m_TagString: enemy
@@ -89,6 +90,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1926180758647178141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157574343537135071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25549d4765f49e48bea5aefab15d22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockback: {fileID: 7162581107750179297, guid: 207864387255fce43a64c0ed205d28f7,
+    type: 3}
+  enemyHP: 20
 --- !u!114 &2876847050737650512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +131,10 @@ MonoBehaviour:
   i: 0
   speed: 0.5
   isArrived: 0
-  attackDamage: 2
   currentEnemyRoom: 0
+  currentEnemyHp: 0
+  enemyController: {fileID: 1926180758647178141, guid: 207864387255fce43a64c0ed205d28f7,
+    type: 3}
 --- !u!58 &2742671221688107884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -179,20 +197,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1926180758647178141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5157574343537135071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25549d4765f49e48bea5aefab15d22c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyHP: 20
-  attackDamage: 10
 --- !u!95 &2134830943455453776
 Animator:
   serializedVersion: 5
@@ -214,3 +218,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-429039290910794804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157574343537135071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4cb7dd899ca5646ae4fca4105d93d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 5
+  knockbackDuration: 0.5

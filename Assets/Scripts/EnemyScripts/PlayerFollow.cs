@@ -37,12 +37,14 @@ public class PlayerFollow : MonoBehaviour
     private int randPosY;
     public float speed;
     public bool isArrived = false;
-    public int attackDamage = 50;
+    private int attackDamage = 10;
     public int currentEnemyRoom = -1;
+    public float currentEnemyHp;
     bool isroomFound = false;
     bool isDestSet = false;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    public Enemy enemyController;
     float playerDistence;
     float time;
     private Color enemyColor;
@@ -53,6 +55,8 @@ public class PlayerFollow : MonoBehaviour
         //enemyColor = this.gameObject.GetComponent<SpriteRenderer>().color;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        attackDamage += RoomManager.Instance.roomGenerateCount;
+        currentEnemyHp = enemyController.enemyHP;
     }
 
     private void FixedUpdate()
@@ -96,6 +100,10 @@ public class PlayerFollow : MonoBehaviour
                     player.GetComponent<Player>().TakeDamage(attackDamage);
                     currenttime = 0f;
                 }
+            }
+            if(currentEnemyHp != enemyController.enemyHP){
+                speed = 1.2f;
+                dest = player.transform.position;
             }
         }
         else{

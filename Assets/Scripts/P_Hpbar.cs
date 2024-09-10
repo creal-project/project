@@ -27,6 +27,8 @@ public class P_Hpbar : MonoBehaviour
 
     void Update()
     {
+        hpbar.maxValue = player.Hp_max;
+        UpdateHp();
         if (hpbar != null)
         {
             hpbar.value = Mathf.SmoothDamp(hpbar.value, targetHp, ref currentVelocity, smoothTime);
