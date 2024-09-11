@@ -129,14 +129,13 @@ MonoBehaviour:
   dest: {x: 0, y: 0}
   isMoving: 0
   isPathFinding: 0
-  enemy: {fileID: 1926180758647178141, guid: 207864387255fce43a64c0ed205d28f7, type: 3}
+  enemy: {fileID: 1926180758647178141}
   i: 0
   speed: 0.5
   isArrived: 0
   currentEnemyRoom: 0
   currentEnemyHp: 0
-  enemyController: {fileID: 1926180758647178141, guid: 207864387255fce43a64c0ed205d28f7,
-    type: 3}
+  enemyController: {fileID: 1926180758647178141}
 --- !u!58 &2742671221688107884
 CircleCollider2D:
   m_ObjectHideFlags: 0

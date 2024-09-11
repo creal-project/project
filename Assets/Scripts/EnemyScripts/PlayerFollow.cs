@@ -31,8 +31,6 @@ public class PlayerFollow : MonoBehaviour
     public Vector2 dest;
     public bool isMoving = false;
     public bool isPathFinding = false;
-    public Enemy enemy;
-
     public int i = 0;
     private int randPosX;
     private int randPosY;
