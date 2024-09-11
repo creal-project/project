@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public PlayerFollow follow;
     Animator animator;
     SpriteRenderer spriteRenderer;
-    CircleCollider2D collider;
+    CircleCollider2D colliderCircle;
 
     public void Awake()
     {
@@ -22,10 +22,10 @@ public class Enemy : MonoBehaviour
     void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator =  GetComponent<Animator>();
-        collider = GetComponent<CircleCollider2D>();
+        colliderCircle = GetComponent<CircleCollider2D>();
         animator.SetBool("isAlive",true);
         follow.enabled = true;
-        collider.enabled = true;
+        colliderCircle.enabled = true;
     }
     public void TakeDamage(float damage)
     {
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         this.isAlive = false;
         //Debug.Log("Enemy died!");
         this.animator.SetBool("isAlive",false);
-        this.collider.enabled = false;
+        this.colliderCircle.enabled = false;
         //Destroy(gameObject);
     }
 }
