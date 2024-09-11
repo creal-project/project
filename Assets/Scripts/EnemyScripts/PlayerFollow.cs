@@ -41,6 +41,7 @@ public class PlayerFollow : MonoBehaviour
     private int attackDamage = 10;
     public int currentEnemyRoom = -1;
     public float currentEnemyHp;
+    float maxHp;
     bool isroomFound = false;
     bool isDestSet = false;
     Animator animator;
@@ -105,9 +106,6 @@ public class PlayerFollow : MonoBehaviour
             if(currentEnemyHp != enemyController.enemyHP){
                 speed = 1.2f;
                 dest = player.transform.position;
-            }
-            if(enemy.GetComponent<Enemy>().isAlive){
-                StopAllCoroutines();
             }
         }
         else{

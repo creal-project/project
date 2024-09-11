@@ -24,15 +24,12 @@ public class Enemy : MonoBehaviour
         animator =  GetComponent<Animator>();
         collider = GetComponent<CircleCollider2D>();
         animator.SetBool("isAlive",true);
+        follow.enabled = true;
+        collider.enabled = true;
     }
     public void TakeDamage(float damage)
     {
         enemyHP -= damage;
-
-        if (enemyHP <= 0)
-        {
-            Die();
-        }
     }
     private void Update()
     {
@@ -42,15 +39,20 @@ public class Enemy : MonoBehaviour
         //         knockback.ApplyKnockback(-(player.transform.position-this.transform.position));
         //     }
         // }
+        if (enemyHP <= 0)
+        {
+            Die();
+            follow.StopAllCoroutines();
+            follow.enabled = false;
+        }
     }
 
     private void Die()
     {
-        isAlive = false;
-        Debug.Log("Enemy died!");
-        animator.SetBool("isAlive",false);
-        follow.enabled = false;
-        collider.enabled = false;
+        this.isAlive = false;
+        //Debug.Log("Enemy died!");
+        this.animator.SetBool("isAlive",false);
+        this.collider.enabled = false;
         //Destroy(gameObject);
     }
 }

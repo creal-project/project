@@ -105,7 +105,7 @@ MonoBehaviour:
   deadSprite: {fileID: -2007313318, guid: 3bcb7877229a5334da528f2f0872b5c3, type: 3}
   isAlive: 0
   enemyHP: 20
-  follow: {fileID: 2876847050737650512, guid: 207864387255fce43a64c0ed205d28f7, type: 3}
+  follow: {fileID: 2876847050737650512}
 --- !u!114 &2876847050737650512
 MonoBehaviour:
   m_ObjectHideFlags: 0
