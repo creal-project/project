@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) && canAttack)
         {
-            Debug.Log("@@");
             Attack();
         }
 

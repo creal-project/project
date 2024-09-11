@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
     CircleCollider2D colliderCircle;
+    public Color damageColor = Color.red;
+    private Color originalColor;
 
     public void Awake()
     {
@@ -26,10 +28,19 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isAlive",true);
         follow.enabled = true;
         colliderCircle.enabled = true;
+        
+        originalColor = spriteRenderer.color;
     }
     public void TakeDamage(float damage)
     {
         enemyHP -= damage;
+        spriteRenderer.color = damageColor;
+        StartCoroutine(ResetColorAfterDelay(0.5f));
+    }
+    private IEnumerator ResetColorAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        spriteRenderer.color = originalColor;
     }
     private void Update()
     {
