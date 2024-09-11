@@ -31,6 +31,7 @@ public class PlayerFollow : MonoBehaviour
     public Vector2 dest;
     public bool isMoving = false;
     public bool isPathFinding = false;
+    public Enemy enemy;
 
     public int i = 0;
     private int randPosX;
@@ -47,7 +48,7 @@ public class PlayerFollow : MonoBehaviour
     public Enemy enemyController;
     float playerDistence;
     float time;
-    private Color enemyColor;
+    //private Color enemyColor;
     private float cooltime =2f;
     private float currenttime =0;
     private void Start(){
@@ -74,7 +75,7 @@ public class PlayerFollow : MonoBehaviour
         }
         if(GameManager.Instance.currentPlayerRoom == currentEnemyRoom){
             //this.gameObject.GetComponent<SpriteRenderer>().color = new Color(255,0,0);
-            enemyColor.a = 1f;
+            //enemyColor.a = 1f;
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
             playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
@@ -104,6 +105,9 @@ public class PlayerFollow : MonoBehaviour
             if(currentEnemyHp != enemyController.enemyHP){
                 speed = 1.2f;
                 dest = player.transform.position;
+            }
+            if(enemy.GetComponent<Enemy>().isAlive){
+                StopAllCoroutines();
             }
         }
         else{
