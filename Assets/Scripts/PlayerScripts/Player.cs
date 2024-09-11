@@ -17,8 +17,9 @@ public class Player : MonoBehaviour
     public delegate void CdChanged(); 
     public event HpChanged OnHpChanged; // 체력 변경 이벤트
     public event CdChanged OnCdChanged; // 쿨타임 변경 이벤트
-
+    private Color originalColor;
     private Rigidbody2D rb;
+    public Color damageColor = Color.red;
     private bool canAttack = true;
     public float currentAttackCooldown = 0f; // 현재 쿨다운 변수
 
@@ -26,9 +27,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     void Update()
@@ -124,11 +127,19 @@ public class Player : MonoBehaviour
     public void TakeDamage(float attackDamage)
     {
         hp -= (int)attackDamage;
-        OnHpChanged?.Invoke(); // 체력 변경 이벤트 호출
+        spriteRenderer.color = damageColor; // 색상을 빨간색으로 변경
+        StartCoroutine(ResetColorAfterDelay(0.5f));
+        OnHpChanged?.Invoke();
+
     }
 
     public bool IsDead() // 플레이어 사망 체크
     {
         return hp <= 0;
+    }
+    private IEnumerator ResetColorAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        spriteRenderer.color = originalColor; // 색상을 원래대로 복귀
     }
 }
