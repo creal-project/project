@@ -102,8 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25549d4765f49e48bea5aefab15d22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockback: {fileID: 7162581107750179297}
+  deadSprite: {fileID: 297993398, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
+  isAlive: 0
   enemyHP: 20
+  follow: {fileID: 2876847050737650512}
 --- !u!114 &2876847050737650512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +129,7 @@ MonoBehaviour:
   dest: {x: 0, y: 0}
   isMoving: 0
   isPathFinding: 0
+  enemy: {fileID: 1926180758647178141}
   i: 0
   speed: 0.5
   isArrived: 0
@@ -165,7 +168,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.09}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!50 &2535165859922520916
