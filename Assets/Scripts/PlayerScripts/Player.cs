@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,12 +12,13 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer; // 적 레이어
     Animator animator;
     SpriteRenderer spriteRenderer;
-    public delegate void HpChanged(); 
-    public delegate void CdChanged(); 
+    public delegate void HpChanged();
+    public delegate void CdChanged();
     public event HpChanged OnHpChanged; // 체력 변경 이벤트
     public event CdChanged OnCdChanged; // 쿨타임 변경 이벤트
     private Color originalColor;
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2D;
     public Color damageColor = Color.red;
     private bool canAttack = true;
     public float currentAttackCooldown = 0f; // 현재 쿨다운 변수
@@ -27,42 +27,54 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         originalColor = spriteRenderer.color;
     }
 
     void Update()
     {
-        PlayerMove();
-        HandleAttack();
-        SetLimit();
+        if (hp <= 0)
+        {
+            animator.SetBool("isAlive", false);
+            this.boxCollider2D.enabled = false;
+        }
+        else
+        {
+            animator.SetBool("isAlive", true);
+            this.boxCollider2D.enabled = true;
+            PlayerMove();
+            HandleAttack();
+            SetLimit();
+        }
     }
 
     void PlayerMove()
     {
         float hor = Input.GetAxisRaw("Horizontal");
         float ver = Input.GetAxisRaw("Vertical");
-        if(ver != 0 || hor !=  0)
+        if (ver != 0 || hor != 0)
         {
-            if(hor<0)
+            if (hor < 0)
             {
                 spriteRenderer.flipX = true;
             }
-            else{
+            else
+            {
                 spriteRenderer.flipX = false;
             }
-            animator.SetBool("MoveBool",true);
-            
+            animator.SetBool("MoveBool", true);
+
         }
-        else{
-            animator.SetBool("MoveBool",false);
+        else
+        {
+            animator.SetBool("MoveBool", false);
         }
         Vector2 moveVector = new Vector2(hor, ver).normalized;
         transform.position += (Vector3)moveVector * movementSpeed * Time.deltaTime;
-        
+
     }
 
     void HandleAttack()
@@ -91,12 +103,12 @@ public class Player : MonoBehaviour
         Debug.Log("123");
         foreach (Collider2D target in targets)
         {
-            
+
             if (target != null)
             {
                 Enemy enemyAttack = target.GetComponent<Enemy>();
                 BossController bossController = target.GetComponent<BossController>();
-                
+
                 if (enemyAttack != null)
                 {
                     enemyAttack.TakeDamage(atk);
@@ -111,14 +123,18 @@ public class Player : MonoBehaviour
             }
         }
     }
-    public void SetLimit(){
-        if(attackCooldown<0.4f){
+    public void SetLimit()
+    {
+        if (attackCooldown < 0.4f)
+        {
             attackCooldown = 0.4f;
         }
-        if(Hp_max>200){
+        if (Hp_max > 200)
+        {
             Hp_max = 200;
         }
-        if(atk>100){
+        if (atk > 100)
+        {
             atk = 100;
         }
     }

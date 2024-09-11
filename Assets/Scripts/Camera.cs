@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Camera : MonoBehaviour
@@ -13,14 +11,10 @@ public class Camera : MonoBehaviour
         }
         Vector3 Target = RoomManager.Instance.CurrentRoom.transform.position;
         Target.z = -10f;
-        transform.position = Vector3.Lerp(transform.position, Target, LerpSmooth);
+        transform.position = Vector3.Lerp(transform.position, Target, LerpSmooth*Time.deltaTime);
     }
-    private void Update()
+    private void FixedUpdate()
     {
         moveCamera();
-    }
-    private void Start()
-    {
-        
     }
 }
