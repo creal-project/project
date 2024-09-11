@@ -14,4 +14,7 @@ public class ToGame : MonoBehaviour
         Time.timeScale = 1f;
         panel.SetActive(false);
     }
+    public void restart(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
