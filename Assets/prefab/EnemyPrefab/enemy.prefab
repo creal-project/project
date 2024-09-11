@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.9133334, y: 2.4095302, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,8 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadSprite: {fileID: 297993398, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   isAlive: 0
-  enemyHP: 20
+  enemyHP: 10
   follow: {fileID: 2876847050737650512}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2876847050737650512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +130,6 @@ MonoBehaviour:
   dest: {x: 0, y: 0}
   isMoving: 0
   isPathFinding: 0
-  enemy: {fileID: 1926180758647178141}
   i: 0
   speed: 0.5
   isArrived: 0

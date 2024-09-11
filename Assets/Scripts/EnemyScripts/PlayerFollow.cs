@@ -78,7 +78,7 @@ public class PlayerFollow : MonoBehaviour
             startPos = new Vector2Int(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
             targetPos = new Vector2Int(Mathf.RoundToInt(dest.x), Mathf.RoundToInt(dest.y));
             playerDistence = Vector2.Distance(GameObject.FindWithTag("Player").transform.position,this.transform.position);
-            if(playerDistence <= GameManager.Instance.enemyDetectDistence){
+            if(playerDistence <= GameManager.Instance.enemyDetectDistence && !player.GetComponent<Player>().IsDead()){
                 dest = player.transform.position;
             }
             else{
@@ -94,7 +94,7 @@ public class PlayerFollow : MonoBehaviour
             if(isDestSet){
                 Follow();
             }
-            if(playerDistence <= GameManager.Instance.enemyAttackDistence){
+            if(playerDistence <= GameManager.Instance.enemyAttackDistence && !player.GetComponent<Player>().IsDead()){
                 
                 if(cooltime<currenttime){
                     player.GetComponent<Player>().TakeDamage(attackDamage);
