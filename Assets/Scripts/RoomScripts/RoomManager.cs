@@ -29,7 +29,7 @@ public class RoomManager : SIngleTon<RoomManager>
     public int roomCount;
     int roomChanged = 1;
 
-    private int Rand;
+    public int Rand;
 
     public bool generationComplete = false;
     public Vector2Int InitialRoomIndex;
@@ -41,7 +41,7 @@ public class RoomManager : SIngleTon<RoomManager>
     public void Start1()
     {
         player = GameObject.Find("Player");
-        Rand = Random.Range(minRooms-1, maxRooms);
+        Rand = Random.Range(minRooms,minRooms);
         Debug.Log(Rand);
         roomGrid = new int[gridSizeX, gridSizeY];
         roomQueue = new Queue<Vector2Int>();

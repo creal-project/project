@@ -8,7 +8,7 @@ public class Door : MonoBehaviour
     [SerializeField] GameObject rightDoor;
     [SerializeField] GameObject bottomDoor;
     GameObject player;
-    public float a = 9.5f;
+    public float a = 12f;
     public bool top, left, right, bottom;
     
     float detectionRange = 4f;
