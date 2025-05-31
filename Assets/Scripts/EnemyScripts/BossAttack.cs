@@ -33,7 +33,7 @@ public class BossAttack : MonoBehaviour
 
             GameObject tmpObj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
             Rigidbody2D rb = tmpObj.GetComponent<Rigidbody2D>();
-            rb.velocity = projectileDirection;
+            rb.linearVelocity = projectileDirection;
 
             Collider2D collider = tmpObj.GetComponent<Collider2D>();
             if (collider != null)
